@@ -1,0 +1,315 @@
+<div class="product-form__info-item">
+                
+ {%comment%}
+        -------------------------------
+        -------------------------------
+        Discount coupon code
+        -------------------------------
+ {%endcomment%}      
+        
+ <div>
+
+      {% assign product_price = product.selected_or_first_available_variant.price | round: 2  %}
+      {% assign product_sale = false %}
+      {% assign product_discount = '' %}
+      {% assign discount_code = '' %}
+      {% for tag in product.tags %}
+      {% if tag contains 'DISCOUNT_' %}
+      {% assign product_discount = tag | split: "DISCOUNT_" | last %}
+      {% assign discount_code = tag | split: "_DISCOUNT" | first %}
+       {% if product.vendor contains "Kalalou" %}
+          {% comment %} <!-- //COMMENTEDT BY NEHA -->
+      		{% assign product_sale = true %}
+        	{% assign sale_price = product_price %}
+       		{% assign x  = 100 | minus : product_discount   %}
+       		{% assign product_price = sale_price | divided_by : x | times: 100 %}
+       		{% assign save_price = product_price | minus: sale_price %}
+      		{% endcomment %} <!-- //COMMENTEDT BY NEHA -->
+
+      		<!-- //ADDED BY NEHA -->
+      		{% assign save_price = product.selected_or_first_available_variant.price | times: product_discount | divided_by: 100 %}
+        	{% assign sale_price = product.selected_or_first_available_variant.price | minus: save_price %}
+
+      {% else %}
+        {% assign save_price = product.selected_or_first_available_variant.price | times: product_discount | divided_by: 100 %}
+        {% assign sale_price = product.selected_or_first_available_variant.price | minus: save_price %}
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+
+            {% if product_sale %}
+      <div class="grid--full margin-bottom-10 ShippingMessage">
+        <div class="product_price">
+          <span class="sale_price">{{ sale_price | money }}</span>
+          <span class="regular_price">{{ product_price | money }}</span>
+        </div>
+        <div class="affirm-block">
+          {% if product.vendor == "Modway" %}
+          <!--<div class="staticShippingMessage">
+            <div class="shipIcon">
+              <img src="https://cdn.shopify.com/s/files/1/0236/1829/files/truck.svg?22611">
+            </div>
+            <div class="shipMsg">
+              <p>Small Items- Fedex - Transit time - 1-2 weeks.</p>
+              <p>Big Items- Truck- Transit time - 2-3 weeks.</p>
+            </div>
+          </div>-->
+          {% endif %}
+          <a id="learn-more" style="visibility: none" href="javascript:void(0)"></a>
+        </div>
+      </div>
+      {% else %}
+      <div class="grid--full margin-bottom-10 ShippingMessage">
+        <div class="product_price">
+          {% comment %}
+          {% if variant.id == 29542679773249 %}
+          		<span class="staticPriceForNewsletter">$1140 </span>
+           {% endif %}
+
+           {% if variant.id == 802202045 %}
+          		<span class="staticPriceForNewsletter">$1599 </span>
+           {% endif %}
+           {% if product.id == 8659860944 %}
+          		<span class="staticPriceForNewsletter">$330 </span>
+           {% endif %}
+           {% if product.id == 147438176 %}
+          		<span class="staticPriceForNewsletter">$521 </span>
+           {% endif %}
+           {% if product.id == 4348275916842 %}
+          		<span class="staticPriceForNewsletter">$321 </span>
+           {% endif %}
+           {% if product.id == 162854845 %}
+          		<span class="staticPriceForNewsletter">$1098 </span>
+           {% endif %}
+           {% if product.id == 4269262340138 %}
+          		<span class="staticPriceForNewsletter">$550 </span>
+           {% endif %}
+           {% if product.id == 3952535044161 %}
+          		<span class="staticPriceForNewsletter">$321 </span>
+           {% endif %}
+           {% if product.id == 360358921 %}
+          		<span class="staticPriceForNewsletter">$370 </span>
+           {% endif %}
+           {% if product.id == 147438453 %}
+          		<span class="staticPriceForNewsletter">$415 </span>
+           {% endif %}
+           {% if product.id == 3512278917 %}
+          		<span class="staticPriceForNewsletter">$910 </span>
+           {% endif %}
+           {% if product.id == 4110472708138 %}
+          		<span class="staticPriceForNewsletter">$910 </span>
+           {% endif %}
+
+           {% if product.id == 3952539893825 %}
+          		<span class="staticPriceForNewsletter">$321 </span>
+           {% endif %}
+
+           {% if product.id == 4267187535914 %}
+          		<span class="staticPriceForNewsletter">$120 </span>
+           {% endif %}
+
+          <!--   Ravi 17022020 -->
+          {% if product.id == 6135588485 %}
+          		<span class="staticPriceForNewsletter">$945 </span>
+           {% endif %}
+
+          {% if product.id == 6127998533  %}
+          		<span class="staticPriceForNewsletter">$949 </span>
+           {% endif %}
+
+          {% if product.id == 6136359045 %}
+          		<span class="staticPriceForNewsletter">$849 </span>
+           {% endif %}
+
+          {% if product.id == 325651749 %}
+          		<span class="staticPriceForNewsletter">$553 </span>
+           {% endif %}
+
+          {% if product.id == 149502521 %}
+          		<span class="staticPriceForNewsletter">$576 </span>
+           {% endif %}
+
+          {% if product.id == 3946160128065  %}
+          		<span class="staticPriceForNewsletter">$869 </span>
+          {% endif %}
+
+          {% endcomment %}
+
+<!--           <span id="productPrice" class="h1">
+            {% include 'price' with variant.price %}
+          </span> -->
+          
+        </div>
+        <div class="affirm-block">
+          {% if product.vendor == "Modway" %}
+          <!--<div class="staticShippingMessage">
+            <div class="shipIcon">
+              <img src="https://cdn.shopify.com/s/files/1/0236/1829/files/truck.svg?22611">
+            </div>
+            <div class="shipMsg">
+              <p>Small Items- Fedex - Transit time - 1-2 weeks.</p>
+              <p>Big Items- Truck- Transit time - 2-3 weeks.</p>
+            </div>
+          </div>-->
+          {% endif %}
+          <a id="learn-more" style="visibility: none" href="javascript:void(0)"></a>
+        </div>
+      </div>
+      {% endif %}
+
+     {% render 'product-discount-code' %}
+      {% unless discount_code == '' %}
+      {% assign var_meta = false %}
+      {% if product.variants.size > 1 %}
+      	{% for variant in product.variants %}
+      		{% if variant.metafields.Modish.Discount contains '_DISCOUNT_' %}
+      			{% assign var_meta = true %}
+      		{% endif %}
+      	{% endfor %}
+      {% endif %}
+
+      {% if product.vendor contains "Kalalou" %}
+       {% if product.tags contains 'HAPPY10_DISCOUNT_10' or product.tags contains 'HAPPY15_DISCOUNT_15' or product.tags contains 'HAPPY20_DISCOUNT_20' or product.tags contains 'HAPPY25_DISCOUNT_25' or product.tags contains 'HAPPY30_DISCOUNT_30' or product.tags contains 'HAPPY40_DISCOUNT_40' or product.tags contains 'HAPPY50_DISCOUNT_50' %}
+         <div class="spring-offer-msg ll"{% if var_meta %} style="display:none;"{% endif %}>
+         Save <span class="var_disc"><strong class="pro_discount">{{ sale_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> Use <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+        </div>
+      {% else %}
+           <div class="spring-offer-msg ll"{% if var_meta %} style="display:none;"{% endif %}>
+        Sale: Save an Extra <span class="var_disc"><strong class="pro_discount">{{ sale_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+        </div>
+      {% endif %}
+
+          {% elsif product.vendor contains "Bey-Berk" %}
+      {% if product.tags contains 'HAPPY10_DISCOUNT_10' or product.tags contains 'HAPPY15_DISCOUNT_15' or product.tags contains 'HAPPY20_DISCOUNT_20' or product.tags contains 'HAPPY25_DISCOUNT_25' or product.tags contains 'HAPPY30_DISCOUNT_30' or product.tags contains 'HAPPY40_DISCOUNT_40' or product.tags contains 'HAPPY50_DISCOUNT_50' %}
+          <div class="spring-offer-msg ll"{% if var_meta %} style="display:none;"{% endif %}>
+           Save <span class="var_disc"><strong class="pro_discount">{{ product_price | times : 20| divided_by : 100 | money }}</strong> (20%)</span> Use <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+        </div>
+      {% else %}
+          <div class="spring-offer-msg ll"{% if var_meta %} style="display:none;"{% endif %}>
+         Sale: Save an Extra <span class="var_disc"><strong class="pro_discount">{{ product_price | times : 20| divided_by : 100 | money }}</strong> (20%)</span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+        </div>
+      {% endif %}
+
+       {% elsif product.vendor contains "Vita Lighting" %}
+      {% if product.tags contains 'HAPPY10_DISCOUNT_10' or product.tags contains 'HAPPY15_DISCOUNT_15' or product.tags contains 'HAPPY20_DISCOUNT_20' or product.tags contains 'HAPPY25_DISCOUNT_25' or product.tags contains 'HAPPY30_DISCOUNT_30' or product.tags contains 'HAPPY40_DISCOUNT_40' or product.tags contains 'HAPPY50_DISCOUNT_50' %}
+          <div class="spring-offer-msg 555"{% if var_meta %} style="display:none;"{% endif %}>
+          Save <span class="var_disc"><strong class="pro_discount">{{ product_price | times : 20| divided_by : 100 | money }}</strong> (20%)</span> Use <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+      	</div>
+      {% else %}
+          <div class="spring-offer-msg 555"{% if var_meta %} style="display:none;"{% endif %}>
+         Sale: Save an Extra <span class="var_disc"><strong class="pro_discount">{{ product_price | times : 20| divided_by : 100 | money }}</strong> (20%)</span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+      	</div>
+      {% endif %}
+
+
+        {% elsif product.vendor contains "Artisan Living" %}
+
+      {% if product.tags contains 'HAPPY10_DISCOUNT_10' or product.tags contains 'HAPPY15_DISCOUNT_15' or product.tags contains 'HAPPY20_DISCOUNT_20' or product.tags contains 'HAPPY25_DISCOUNT_25' or product.tags contains 'HAPPY30_DISCOUNT_30' or product.tags contains 'HAPPY40_DISCOUNT_40' or product.tags contains 'HAPPY50_DISCOUNT_50' %}
+          <div class="spring-offer-msg 6666"{% if var_meta %} style="display:none;"{% endif %}>
+         	Save <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> Use <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+             {% if product.id == 406557852 %}
+
+            {% endif %}
+      	  </div>
+      {% else %}
+          <div class="spring-offer-msg 555"{% if var_meta %} style="display:none;"{% endif %}>
+         	Sale: Save an Extra <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+      	  </div>
+      {% endif %}
+
+
+        {% elsif product.vendor contains "Uttermost" %}
+
+      {% if product.tags contains 'UTTER5' or product.tags contains 'UTTER5' or product.tags contains 'HAPPY20_DISCOUNT_20' or product.tags contains 'HAPPY25_DISCOUNT_25' or product.tags contains 'HAPPY30_DISCOUNT_30' or product.tags contains 'HAPPY40_DISCOUNT_40' or product.tags contains 'HAPPY50_DISCOUNT_50' %}
+          <div class="spring-offer-msg 6666"{% if var_meta %} style="display:none;"{% endif %}>
+         	Save <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> Use <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+            {% if product.id == 406557852 %}
+
+            {% endif %}
+      	  </div>
+      {% else %}
+          <div class="spring-offer-msg 555"{% if var_meta %} style="display:none;"{% endif %}>
+         	Sale: Save an Extra <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+      	  </div>
+      {% endif %}
+
+
+
+              {% elsif product.vendor contains "LumiSource" %}
+
+      {% if product.tags contains 'LUMI7' or product.tags contains 'LUMI7' or product.tags contains 'LUMI7' or product.tags contains 'LUMI7' or product.tags contains 'LUMI7' or product.tags contains 'LUMI7' or product.tags contains 'LUMI7' %}
+          <div class="spring-offer-msg 6666"{% if var_meta %} style="display:none;"{% endif %}>
+         	Save <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> Use <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+            {% if product.id == 406557852 %}
+
+            {% endif %}
+      	  </div>
+      {% else %}
+          <div class="spring-offer-msg 555"{% if var_meta %} style="display:none;"{% endif %}>
+         	Sale: Save an Extra <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+      	  </div>
+      {% endif %}
+
+
+              {% elsif product.vendor contains "Dimond Home" %}
+
+      {% if product.tags contains 'DIMOND10' or product.tags contains 'DIMOND10' or product.tags contains 'DIMOND10' or product.tags contains 'DIMOND10' or product.tags contains 'DIMOND10' or product.tags contains 'DIMOND10' or product.tags contains 'DIMOND10' %}
+          <div class="spring-offer-msg 6666"{% if var_meta %} style="display:none;"{% endif %}>
+         	Save <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> Use <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+            {% if product.id == 406557852 %}
+
+            {% endif %}
+      	  </div>
+      {% else %}
+          <div class="spring-offer-msg 555"{% if var_meta %} style="display:none;"{% endif %}>
+         	Sale: Save an Extra <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+      	  </div>
+      {% endif %}
+
+      {% elsif product.vendor contains "Modloft" %}
+
+      {% if product.tags contains 'Happy10' or product.tags contains 'WORK10' or product.tags contains 'Happy10' or product.tags contains 'WORK10' or product.tags contains 'Happy10' or product.tags contains 'WORK10' or product.tags contains 'Happy10' %}
+          <div class="spring-offer-msg 6666"{% if var_meta %} style="display:none;"{% endif %}>
+         	Save <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> Use <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+            {% if product.id == 406557852 %}
+
+            {% endif %}
+      	  </div>
+      {% else %}
+          <div class="spring-offer-msg 555"{% if var_meta %} style="display:none;"{% endif %}>
+         	Sale: Save an Extra <span class="var_disc"><strong class="pro_discount">{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%) </span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout.
+      	  </div>
+      {% endif %}
+
+
+
+          {% else %}
+
+         	{% if variant.inventory_management == "shopify" %}
+        		{% if variant.available %}
+
+      {% if product.tags contains 'HOM40_DISCOUNT_40' or product.tags contains 'HOM40_DISCOUNT_40' %}
+      <div class="spring-offer-msg ll"{% if var_meta %} style="display:none;"{% endif %}>
+       Sale: Save an Extra <span class="var_disc 44 ll aaaa"><strong class="pro_discount" pp_{{ product_discount }}>{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span>at Checkout <span class="sale_txt"></span><span id="tmr_cnt"></span>
+      </div>
+       {% endif %}
+
+        {% if variant.inventory_quantity > 0 %}
+      		{% unless product.tags contains 'HOM40_DISCOUNT_40' %}
+        		<div class="spring-offer-msg ll"{% if var_meta %} style="display:none;"{% endif %}>
+        Sale: Save an Extra <span class="var_disc 44 ll bbbb"><strong class="pro_discount" pp_{{ product_discount }}>{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span>at Checkout <span class="sale_txt"></span><span id="tmr_cnt"></span>{% if product.tags contains 'ROOST10_DISCOUNT_10' or product.tags contains 'ROOST10OFF_DISCOUNT_10' %} (Selected Variant Only.){% endif %}
+        		</div>
+      		{% endunless %}
+          {% endif %}
+        		{% endif %}
+        	{% endif %}
+
+        {% endif %}
+
+      {% endunless %}
+      <hr>
+  
+  
+           
+        </div>
+</div>

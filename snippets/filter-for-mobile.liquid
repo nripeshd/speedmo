@@ -1,0 +1,196 @@
+<div id="{{ link_id }}" class="collection__filter-collapsible" aria-hidden="true">
+                          {% assign Allmaterials = 'Acrylic, Aluminium, Bamboo, Clay, Ceramic, Copper, Concrete, Fabric, Foam, Fiberglass, Fiberboard, Fibreglass, Glass, Hide, Iron, Leather, Metal, Mdf, Marble, Others, Oak, Polypropylene, Plastic, Resin, Rattan, Stone, Synthetic Leather, Steel, teakwood, Upholstered, Veneer, Vinyl, Wood, Zinc' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}
+                           
+                            {% assign Allshape = 'Free Form, Oval, Rectangle, Round, Square, Specialty' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}
+                          {% assign Allcolors = 'Blue, Black, Brown, Beige, Chrome, Clear, Cherry, Cappuccino, Coffee, Cream, Fruitwood, Grey, Green, Gold, Multicolored, Natural, Orange, Purple, Red, Silver, Tan, White, Walnut, Woodgrain, Yellow' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}  
+                          {% assign Allpattern = 'Floral, Geometric, Print, Solid, Striped, Transparent' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}
+                          {% assign Allstyle = 'Beach Style, Classic, Contemporary, Country, Eclectic, Industrial, Modern, Rustic, Retro-Modern, Retro-industrial, Traditional, Transitional, Vintage' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}  
+                          {% assign Allvendor = '2-Day Designs, A&B Home, Accent Decor, Aeon Furniture, Aire Furniture, All Things Cedar, Anji Mountain, Anywhere Fireplace, Antlerworx, Aron Living, Art Classics, Artisan Living, Authentic Models, Bey-Berk, Boraam, Cal Lighting, Captiva, Ceets, Control Brand, Cyan Design, Dimond Home, Dimond Lighting, Drift Home, EdgeMod Furniture, Edloe Finch, ELK Lighting, Emerald Home Furnishings, Enrico, Fine Mod Imports, Fine Mode Imports, Flash Furniture, Four Hands, Furniture of America, Garden Age Supply, Global Views, Gold Leaf Design Group, Greenington, Guild Master, Go Home, Haussmann, Hi-Line Gift Ltd., HomArt, Interior Illusions Plus, International Home Miami, Jofran, Kalalou, Kidsmill Furniture, Kube Import, Lamp Works, Leftbank Art, Light & Contrast, Loom & Mill, LumiSource, Manhattan Comfort, Masaya & Co, Mirror Masters, Misc, Mod Made, Modish, Modish Store, Modloft, Modway, Moes Home Collection, Nanoworks, Napa Home and Garden, North Teak, Oohlong, Oggetti, Padmas Plantation, Picnic Time, Plata Import, Pomeroy, Primo, Roost, Safavieh, Saro, Screen Gems, Selamat, Shiraleah, Sika, Skyline Furniture, Stein World, Sterling Industries, Strata Furniture, Surya, Tag Furnishings Group, Teton Home, Texture Designideas, The HomePort Collections, Three Hands, Tozai, Tozai Home, Trans-Ocean, Twos Company, Umbra, URBN, Uttermost, Vagabond Vintage, Vita Lighting, Whiteline, Whitney Brothers, Z-Line Designs, Zodax, Zuo, Zuo Modern' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}
+                          {% assign Backheight = 'High Back, Low Back, Mid Back' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}
+                           
+                            {% assign Alldiscount = 'DISCOUNT' %}
+                        
+                          
+                          {%if link_id=='filter-7'%}
+                          
+                          <ul class="collection__filter-checkbox-list" role="list">
+                            
+                            {%- for tag in Allmaterials -%}
+                                
+                            {%- assign tag_parts = tag | split: ',' -%}
+ 								 {% if collection.all_tags contains tag %}
+                               
+
+                                <li class="collection__filter-checkbox">
+                                  <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox" id="{{ link_id }}-tag-{{ tag | handle }}" name="tag-{{ tag_parts.first | handle }}" data-action="toggle-tag" data-tag="{{ tag | handle }}" data-tag-user="{{ tag_parts.last | escape }}" {% if current_tags contains tag %}checked="checked"{% endif %}>
+                                    {% render 'icon', icon: 'check' %}
+                                  </div>
+
+                                  <label for="{{ link_id }}-tag-{{ tag | handle }}">{{ tag | handle|camelcase }}</label>
+                                </li>
+                             {%endif%}
+                              {%- endfor -%}
+                            
+                            
+                            </ul>
+                             
+                          {%endif%}
+                          {%if link_id=='filter-8'%}
+                          <ul class="collection__filter-checkbox-list" role="list">
+                              {%- for tag in Allshape -%}
+                             
+                                {%- assign tag_parts = tag | split: ',' -%}
+								{% if collection.all_tags contains tag %}
+                               
+
+                                <li class="collection__filter-checkbox">
+                                  <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox" id="{{ link_id }}-tag-{{ tag | handle }}" name="tag-{{ tag_parts.first | handle }}" data-action="toggle-tag" data-tag="{{ tag | handle }}" data-tag-user="{{ tag_parts.last | escape }}" {% if current_tags contains tag %}checked="checked"{% endif %}>
+                                    {% render 'icon', icon: 'check' %}
+                                  </div>
+
+                                  <label for="{{ link_id }}-tag-{{ tag | handle }}">{{ tag | handle|camelcase }}</label>
+                                </li>
+                            {%endif%}
+                              {%- endfor -%}
+                            </ul>
+                          {%endif%}
+                          {%if link_id=='filter-9'%}
+                          <ul class="collection__filter-checkbox-list" role="list">
+                              {%- for tag in Allcolors -%}
+                                {%- assign tag_parts = tag | split: ',' -%}
+
+                               {% if collection.all_tags contains tag %}
+
+                                <li class="collection__filter-checkbox">
+                                  <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox" id="{{ link_id }}-tag-{{ tag | handle }}" name="tag-{{ tag_parts.first | handle }}" data-action="toggle-tag" data-tag="{{ tag | handle }}" data-tag-user="{{ tag_parts.last | escape }}" {% if current_tags contains tag %}checked="checked"{% endif %}>
+                                    {% render 'icon', icon: 'check' %}
+                                  </div>
+
+                                  <label for="{{ link_id }}-tag-{{ tag | handle }}">{{ tag | handle|camelcase }}</label>
+                                </li>
+                            {%endif%}
+                              {%- endfor -%}
+                            </ul>  
+                          {%endif%}
+  
+                          {%if link_id=='filter-10'%}
+                          <ul class="collection__filter-checkbox-list" role="list">
+                              {%- for tag in Allpattern -%}
+                                {%- assign tag_parts = tag | split: ',' -%}
+
+                               {% if collection.all_tags contains tag %}
+
+                                <li class="collection__filter-checkbox">
+                                  <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox" id="{{ link_id }}-tag-{{ tag | handle }}" name="tag-{{ tag_parts.first | handle }}" data-action="toggle-tag" data-tag="{{ tag | handle }}" data-tag-user="{{ tag_parts.last | escape }}" {% if current_tags contains tag %}checked="checked"{% endif %}>
+                                    {% render 'icon', icon: 'check' %}
+                                  </div>
+
+                                  <label for="{{ link_id }}-tag-{{ tag | handle }}">{{ tag | handle|camelcase }}</label>
+                                </li>
+                            {%endif%}
+                              {%- endfor -%}
+                            </ul>
+                          {%endif%}
+                          {%if link_id=='filter-11'%}
+                          <ul class="collection__filter-checkbox-list" role="list">
+                              {%- for tag in Allstyle -%}
+                                {%- assign tag_parts = tag | split: ',' -%}
+
+                               {% if collection.all_tags contains tag %}
+
+                                <li class="collection__filter-checkbox">
+                                  <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox" id="{{ link_id }}-tag-{{ tag | handle }}" name="tag-{{ tag_parts.first | handle }}" data-action="toggle-tag" data-tag="{{ tag | handle }}" data-tag-user="{{ tag_parts.last | escape }}" {% if current_tags contains tag %}checked="checked"{% endif %}>
+                                    {% render 'icon', icon: 'check' %}
+                                  </div>
+
+                                  <label for="{{ link_id }}-tag-{{ tag | handle }}">{{ tag | handle|camelcase }}</label>
+                                </li>
+                            {%endif%}
+                              {%- endfor -%}
+                            </ul>
+                          {%endif%}
+                          {%if link_id=='filter-12'%}
+                          <ul class="collection__filter-checkbox-list" role="list">
+                              {%- for tag in Allvendor -%}
+                                {%- assign tag_parts = tag | split: ',' -%}
+					{% if collection.all_tags contains tag %}
+                               
+
+                                <li class="collection__filter-checkbox">
+                                  <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox" id="{{ link_id }}-tag-{{ tag | handle }}" name="tag-{{ tag_parts.first | handle }}" data-action="toggle-tag" data-tag="{{ tag | handle }}" data-tag-user="{{ tag_parts.last | escape }}" {% if current_tags contains tag %}checked="checked"{% endif %}>
+                                    {% render 'icon', icon: 'check' %}
+                                  </div>
+
+                                  <label for="{{ link_id }}-tag-{{ tag | handle }}">{{ tag | handle|camelcase }}</label>
+                                </li>
+                            {%endif%}
+                              {%- endfor -%}
+                            </ul>
+                          {%endif%}
+                          {%if link_id=='filter-13'%}
+                          <ul class="collection__filter-checkbox-list" role="list">
+                              {%- for tag in Alldiscount -%}
+                                {%- assign tag_parts = tag | split: ',' -%}
+
+                               {% if collection.all_tags contains tag %}
+
+                                <li class="collection__filter-checkbox">
+                                  <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox" id="{{ link_id }}-tag-{{ tag | handle }}" name="tag-{{ tag_parts.first | handle }}" data-action="toggle-tag" data-tag="{{ tag | handle }}" data-tag-user="{{ tag_parts.last | escape }}" {% if current_tags contains tag %}checked="checked"{% endif %}>
+                                    {% render 'icon', icon: 'check' %}
+                                  </div>
+
+                                  <label for="{{ link_id }}-tag-{{ tag | handle }}">{{ tag | handle|camelcase }}</label>
+                                </li>
+                            {%endif%}
+                              {%- endfor -%}
+                            </ul>
+                          {%endif%}
+                          
+               {%comment%} 
+                          
+                          
+                   <ul class="collection__filter-checkbox-list" role="list" >
+					 <script>console.log( {{all_tags_tag_parts}});</script>
+                     
+                     
+                      {%for tagss in all_tags_tag_parts %}
+                   			
+                     		  {%unless tagss == " " or tagss == "_" %}
+                               <script>console.log( {{tagss}});</script> 
+                               <script>console.log( {{t1}});</script> 
+
+                               {%assign t1 = tagss| split: ' '%}
+                               
+
+
+                                  <li class="collection__filter-checkbox">
+                                              <div class="checkbox-wrapper">
+
+                                                <input type="checkbox" class="checkbox" id="{{ link_id }}-tag-{{ tag | handle }}" name="tag-{{ tag_parts.first | handle }}" data-action="toggle-tag" data-tag="{{ t1 | handle }}" data-tag-user="{{ tag_parts.last | escape }}" {% if current_tags contains t1 %}checked="checked"{% endif %}>
+                                                {% render 'icon', icon: 'check' %}
+                                              </div>
+
+                                              <label for="{{ link_id }}-tag-{{ tag | handle }}">{{t1|handle}}</label>
+                                </li>
+					{%assign all_tags_tag_parts=all_tags_tag_parts| replace_first: t1, ' '%}
+                     <script>console.log({{all_tags_tag_parts}});</script>
+                                 {% break %}
+                      
+                     	 {%endunless%}
+                  
+                       {% endfor %}
+                      
+                       
+                            
+           </ul>      
+ 
+              {%endcomment%}     
+                        
+                      </div>

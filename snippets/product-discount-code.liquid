@@ -1,0 +1,55 @@
+{% if product.tags contains 'CYAN70OFF' %}
+	{% assign discount_code = 'CYAN70OFF' %}
+{% elsif product.tags contains 'PILLOW50' or product.tags contains 'FRAMES50' %}
+	{% assign discount_code = 'DEALS50' %}
+{% elsif product.tags contains 'AIRE50' %}
+	{% assign discount_code = 'AIRE50' %}
+{% elsif product.tags contains 'ZUO50OFF' %}
+	{% assign discount_code = 'ZUO50OFF' %}
+{% elsif product.tags contains 'ZUO30OFF' %}
+	{% assign discount_code = 'ZUO30OFF' %}
+{% elsif product.tags contains 'ZUO25OFF' %}
+	{% assign discount_code = 'ZUO25OFF' %}
+{% elsif product.tags contains 'SPRING25' %}
+	{% assign discount_code = 'DEALS25' %}
+{% elsif product.tags contains 'ARTISAN25' %}
+	{% assign discount_code = 'ARTISAN25' %}
+{% elsif product.tags contains 'Kalalou25' %}
+	{% assign discount_code = 'KALALOU25' %}
+{% elsif product.tags contains 'Kalalou21' %}
+	{% assign discount_code = 'KALALOU21' %}
+{% elsif product.tags contains 'ZUO20OFF' %}
+	{% assign discount_code = 'ZUO20OFF' %}
+{% elsif product.tags contains 'SPRING20' %}
+	{% assign discount_code = 'DEALS20' %}
+{% elsif product.tags contains 'VITA20OFF' %}
+	{% assign discount_code = 'VITA20OFF' %}
+{% elsif product.tags contains 'WHITELINE20' %}
+	{% assign discount_code = 'WHITELINE20' %}
+{% elsif product.tags contains 'KALALOU15' %}
+	{% assign discount_code = 'KALALOU15' %}
+{% elsif product.tags contains 'Hi-Line Gift Ltd-Animals & Pets' %}
+	{% assign discount_code = 'HILINE15OFF' %}
+{% elsif product.tags contains 'SPRING15' %}
+	{% assign discount_code = 'DEALS15' %}
+
+{% elsif product.tags contains 'UTTER5' %}
+	{% assign discount_code = 'UTTER5' %}
+
+{% elsif product.tags contains 'UTTER35' %}
+	{% assign discount_code = 'UTTER35' %}
+
+{% elsif product.tags contains 'SPRING10' %}
+	{% assign discount_code = 'DEALS10' %}
+{% elsif product.tags contains 'Kalalou10' %}
+	{% assign discount_code = 'KALALOU10' %}
+
+{% endif %}
+
+ {% if product.vendor contains "Bey-Berk" %}
+     {% assign discount_code = 'VALENTINE20' %}
+{% endif%}
+
+{% if product.vendor contains "HAPPY20" %}
+     {% assign discount_code = 'HAPPY20' %}
+{% endif%}

@@ -1,0 +1,151 @@
+<!--Tejashwani 2021/01/13 This code has been added modish old theme  -->
+
+<div class="product-form__info-item">		
+     <span class="product-form__info-title text--strong"> </span>
+           <div class="product-form__info-content" >
+             
+                
+ {%comment%}
+        -------------------------------
+        -------------------------------
+        Discount coupon code
+        -------------------------------
+ {%endcomment%}      
+          
+      {% assign product_price = product.selected_or_first_available_variant.price | round: 2  %}
+      {% assign product_sale = false %}
+      {% assign product_discount = '' %}
+      {% assign discount_code = '' %}
+      {% for tag in product.tags %}
+      {% if tag contains 'DISCOUNT_' %}
+      {% assign product_discount = tag | split: "DISCOUNT_" | last %}
+      {% assign discount_code = tag | split: "_DISCOUNT" | first %}
+       {% if product.vendor contains "Kalalou" %}
+          
+   <!-- commented by Tejashwani-->
+{% comment %} 
+      		{% assign save_price = product.selected_or_first_available_variant.price | times: product_discount | divided_by: 100 %}
+        	{% assign sale_price = product.selected_or_first_available_variant.price | minus: save_price %}
+
+      {% else %}
+        {% assign save_price = product.selected_or_first_available_variant.price | times: product_discount | divided_by: 100 %}
+        {% assign sale_price = product.selected_or_first_available_variant.price | minus: save_price %}
+{% endcomment %}
+    <!-- commented by Tejashwani-->
+   
+      		<!-- //ADDED BY NEHA -->
+      		{% assign save_price = product.selected_or_first_available_variant.price | times: product_discount | divided_by: 100 %}
+        	{% assign sale_price = product.selected_or_first_available_variant.price %}
+
+      {% else %}
+        {% assign save_price = product.selected_or_first_available_variant.price | times: product_discount | divided_by: 100 %}
+        {% assign sale_price = product.selected_or_first_available_variant.price %}
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+    
+
+     {% render 'product-discount-code' %}
+      {% unless discount_code == '' %}
+      {% assign var_meta = false %}
+      {% if product.variants.size > 1 %}
+      	{% for variant in product.variants %}
+      		{% if variant.metafields.Modish.Discount contains '_DISCOUNT_' %}
+      			{% assign var_meta = true %}
+
+      		{% endif %}
+      	{% endfor %}
+      {% endif %}
+
+     
+      {% if product.vendor %}
+   {%comment%}
+             
+             
+             
+          {% if product.tags contains 'HAPPY10_DISCOUNT_10' or product.tags contains 'HAPPY15_DISCOUNT_15' or product.tags contains 'HAPPY20_DISCOUNT_20' or product.tags contains 'HAPPY25_DISCOUNT_25' or product.tags contains 'HAPPY30_DISCOUNT_30' or product.tags contains 'HAPPY40_DISCOUNT_40' or product.tags contains 'HAPPY50_DISCOUNT_50' %}
+                 
+
+
+			<div {% if var_meta %} style="display:none;"{% endif %}>
+              Save <span><strong class="pro_discount">{{ sale_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> Use <span><strong>'{{discount_code}}'</strong></span>.
+            </div>
+
+			{% assign discount_flag = true%}
+          {% else %}
+             
+             
+             
+               <div {% if var_meta %} style="display:none;"{% endif %}>
+            	Save <span><strong class="pro_discount">{{ sale_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> - Use Code <span><strong>'{{discount_code}}'</strong></span>.
+            </div>
+			{% assign discount_flag = true%}
+          {% endif %}
+   {%endcomment%}
+             
+             
+             
+             {% if product.tags contains 'UTTER5_DISCOUNT_5' %}
+              <div {% if var_meta %} style="display:none;"{% endif %}>
+        <!--             	Save an Extra <span class="var_disc"><strong class="pro_discount">{{ sale_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout. -->
+                      Save <span><strong>8% </strong></span> - Use Code <span><strong>'{{discount_code}}'</strong></span>.         
+                        {% assign discount_flag = true%}
+                    </div>
+             
+             {%else%}
+
+                    <div {% if var_meta %} style="display:none;"{% endif %}>
+        <!--             	Save an Extra <span class="var_disc"><strong class="pro_discount">{{ sale_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> - Use Code <span class="var_tag"><strong>'{{discount_code}}'</strong></span> at Checkout. -->
+                      Save <span><strong>{{product_discount}}% </strong></span> - Use Code <span><strong>'{{discount_code}}'</strong></span>.         
+                        {% assign discount_flag = true%}
+                    </div>
+		{%endif%}
+  
+
+          {% else %}
+
+                {% if variant.inventory_management == "shopify" %}
+                    {% if variant.available %}
+
+                                    {% if product.tags contains 'HOM40_DISCOUNT_40' or product.tags contains 'HOM40_DISCOUNT_40' %}
+                                    <div{% if var_meta %} style="display:none;"{% endif %}>
+                                    Save <span ><strong class="pro_discount" pp_{{ product_discount }}>{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> - Use Code <span><strong>'{{discount_code}}'</strong></span>.
+                                    </div>
+									{% assign discount_flag = true%}
+                                     {% endif %}
+
+                                      {% if variant.inventory_quantity > 0 %}
+                                                    {% unless product.tags contains 'HOM40_DISCOUNT_40' %}
+                                                        <div {% if var_meta %} style="display:none;"{% endif %}>
+                                                Save <span><strong class="pro_discount" pp_{{ product_discount }}>{{ product_price | times : product_discount | divided_by : 100 | money }}</strong> ({{product_discount}}%)</span> - Use Code <span><strong>'{{discount_code}}'</strong></span>.{% if product.tags contains 'ROOST10_DISCOUNT_10' or product.tags contains 'ROOST10OFF_DISCOUNT_10' %} (Selected Variant Only.){% endif %}
+                                                       </div>
+													{% assign discount_flag = true%}
+                                                    {% endunless %}
+                                      {% endif %}
+                    {% endif %}
+                {% endif %}
+
+        {% endif %}
+
+      {% endunless %}
+  
+  
+  
+</div>
+              
+</div>

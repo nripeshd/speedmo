@@ -1,0 +1,41 @@
+<section class="section" data-section-id="{{ section.id }}" data-section-type="html">
+<!--   <div class="container"> -->
+  <div class="">
+    {%- if section.settings.title != blank -%}
+      <header class="section__header">
+        <h2 class="section__title heading h3">{{ section.settings.title | escape }}</h2>
+      </header>
+    {%- endif -%}
+
+<!--     <div class="html rte"> -->
+<!--     <div class=""> -->
+      {{ section.settings.html }}
+<!--     </div> -->
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Your title"
+    },
+    {
+      "type": "html",
+      "id": "html",
+      "label": "HTML",
+      "default": "<p>Write or copy/paste HTML code</p>"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Advanced",
+      "name": "Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,201 @@
+{%- if section.settings.show_sectiona -%}
+  {%- capture section_settings -%}
+  {
+    "currentProductId": {{ product.id | json }}
+  }
+  {%- endcapture -%}
+
+  <section class="section" data-section-id="{{ section.id }}" data-section-type="morebyvendor" data-section-settings='{{ section_settings }}'>
+    <div class="container">
+      {%- if section.settings.title != blank -%}
+        <header class="section__header">
+          {% assign number_of_related_products_to_show = 19 %}
+        {% assign related_counter = 0 %}
+        {% assign image_size = 'large' %}
+        {% assign c_product = product.handle %}
+        {% assign vendor_handle = product.vendor | handle %}
+        {% assign current_collection = collections[vendor_handle] %}
+          {% if current_collection.products.size > 0 %}
+
+          <h2 class="section__title heading h3">More by {{product.vendor}}</h2>
+          <div class="view_all_products hidden-pocket rte"><a href="{{current_collection.url}}" class="link">View More by {{current_collection.title}}</a></div>
+             {%- endif -%}
+<!--            <h2 class="section__title heading h3">More by {{product.vendor}}</h2> -->
+        </header>
+   {%- endif -%}
+<!--     </div> -->
+      <div class="morebyvendor">
+       
+{% assign number_of_related_products_to_show = 19 %}
+{% assign related_counter = 0 %}
+{% assign image_size = 'large' %}
+{% assign c_product = product.handle %}
+{% assign vendor_handle = product.vendor | handle %}
+{% assign current_collection = collections[vendor_handle] %}
+{% assign v_typehandle = product.type | handle %}
+{% assign type = product.type   %}
+{% assign title = product.title %}
+{% if vendor_handle == 'roost' %}
+  {% if type contains 'Pendant Lamps' and collections['roost-lighting-pendant-lamps'].products.size > 0 %} {% assign current_collection = collections['roost-lighting-pendant-lamps'] %}
+  {% elsif type contains 'Chandeliers' and collections['roost-lighting-chandeliers'].products.size > 0 %} {% assign current_collection = collections['roost-lighting-chandeliers'] %}
+  {% elsif type contains 'Table Lamps' or type contains 'Desk Lamps' and collections['roost-lighting-table-lamps'].products.size > 0 %} {% assign current_collection = collections['roost-lighting-table-lamps'] %}
+  {% elsif type contains 'Floor Lamps' and collections['roost-floor-lamps'].products.size > 0 %} {% assign current_collection = collections['roost-floor-lamps'] %}
+  {% elsif type contains 'Porcelain Lamps' and collections['roost-lighting-porcelain-lamps'].products.size > 0 %} {% assign current_collection = collections['roost-lighting-porcelain-lamps'] %}
+  {% elsif type contains 'Architectural Lamps & Filament Bulbs' and collections['architectural-lamps-filament-bulbs'].products.size > 0 %} {% assign current_collection = collections['architectural-lamps-filament-bulbs'] %}
+  {% elsif type contains 'Light Strands' and collections['roost-lighting-light-strands'].products.size > 0 %} {% assign current_collection = collections['roost-lighting-light-strands'] %}
+  {% elsif type contains 'Chairs' and collections['roost-chairs'].products.size > 0 %} {% assign current_collection = collections['roost-chairs'] %}
+  {% elsif type contains 'Tables' and collections['roost-tables'].products.size > 0 %} {% assign current_collection = collections['roost-tables'] %}
+  {% elsif type contains 'Stools & Benches' and collections['roost-furniture-stools'].products.size > 0 %} {% assign current_collection = collections['roost-furniture-stools'] %}
+  {% elsif type contains 'Bookcases' and collections['roost-furniture-bookshelves-desk'].products.size > 0 %} {% assign current_collection = collections['roost-furniture-bookshelves-desk'] %}
+  {% elsif type contains 'Cabinets' and collections['roost-furniture-cabinet-trunks-crates'].products.size > 0 %} {% assign current_collection = collections['roost-furniture-cabinet-trunks-crates'] %}
+  {% elsif type contains 'Display Cases' or type contains 'Minerals and Stones' or type contains 'Hooks & Racks'  and collections['roost-furniture-screen-coat-rack-display-stand'].products.size > 0 %} {% assign current_collection = collections['roost-furniture-screen-coat-rack-display-stand'] %}
+  {% elsif type contains 'Dinnerware' and collections['roost-kitchen-entertaining-dinnerware'].products.size > 0 %} {% assign current_collection = collections['roost-kitchen-entertaining-dinnerware'] %}
+  {% elsif type contains 'Drinkware' and collections['roost-kitchen-entertaining-glassware'].products.size > 0 %} {% assign current_collection = collections['roost-kitchen-entertaining-glassware'] %}
+  {% elsif type contains 'Bowls' and collections['roost-kitchen-entertaining-serving-bowl-and-platters'].products.size > 0 %} {% assign current_collection = collections['roost-kitchen-entertaining-serving-bowl-and-platters'] %}
+  {% elsif type contains 'Bar Carts' and collections['roost-bar-carts'].products.size > 0 %} {% assign current_collection = collections['roost-bar-carts'] %}
+  {% elsif type contains 'Wine & Bar Accessories' and collections['roost-wine-bar-accessories'].products.size > 0 %} {% assign current_collection = collections['roost-wine-bar-accessories'] %}
+  {% elsif type contains 'Cutting & Serving Boards' and collections['roost-kitchen-entertaining-cutting-boards-coasters'].products.size > 0 %} {% assign current_collection = collections['roost-kitchen-entertaining-cutting-boards-coasters'] %}
+  {% elsif type contains 'Decanters' and collections['roost-decanters'].products.size > 0 %} {% assign current_collection = collections['roost-decanters'] %}
+  {% elsif type contains 'Bins, Baskets & Buckets' and collections['roost-bins-baskets-buckets'].products.size > 0 %} {% assign current_collection = collections['roost-bins-baskets-buckets'] %}
+  {% elsif type contains 'Decanters' and collections['roost-decanters'].products.size > 0 %} {% assign current_collection = collections['roost-decanters'] %}
+  {% elsif type contains 'Trays' and collections['roost-kitchen-entertaining-trays-pedestals'].products.size > 0 %} {% assign current_collection = collections['roost-kitchen-entertaining-trays-pedestals'] %}
+  {% elsif type contains 'Ice & Party Buckets' and collections['roost-kitchen-entertaining-party-bucket-outdoor-entertaining'].products.size > 0 %} {% assign current_collection = collections['roost-kitchen-entertaining-party-bucket-outdoor-entertaining'] %}
+  {% elsif type contains 'Beverage Dispensers' and collections['roost-beverage-dispensers'].products.size > 0 %} {% assign current_collection = collections['roost-beverage-dispensers'] %}
+  {% elsif type contains 'Holiday' and collections['roost-holiday'].products.size > 0 %} {% assign current_collection = collections['roost-holiday'] %}
+  {% elsif type contains 'Vases' and collections['roost-vases'].products.size > 0 %} {% assign current_collection = collections['roost-vases'] %}
+  {% elsif type contains 'Glass Terrariums' and collections['roost-glass-terrariums'].products.size > 0 %} {% assign current_collection = collections['roost-glass-terrariums'] %}
+  {% elsif type contains 'Candle Holder' and collections['roost-home-accessories-votive-candle-holder'].products.size > 0 %} {% assign current_collection = collections['roost-home-accessories-votive-candle-holder'] %}
+  {% elsif type contains 'Candelabra' and collections['roost-candelabra'].products.size > 0 %} {% assign current_collection = collections['roost-candelabra'] %}
+  {% elsif type contains 'Planters, Troughs & Cachepots' and collections['roost-planters-troughs-cachepots'].products.size > 0 %} {% assign current_collection = collections['roost-planters-troughs-cachepots'] %}
+  {% elsif type contains 'Animals & Pets' and collections['roost-animals-pets'].products.size > 0 %} {% assign current_collection = collections['roost-animals-pets'] %}
+  {% elsif type contains 'Mirrors' and collections['roost-mirrors'].products.size > 0 %} {% assign current_collection = collections['roost-mirrors'] %}
+  {% elsif type contains 'Shelves & Shelving Units' and collections['roost-shelves-shelving-units'].products.size > 0 %} {% assign current_collection = collections['roost-shelves-shelving-units'] %}
+  {% elsif type contains 'Hooks & Racks' and collections['roost-hooks-racks'].products.size > 0 %} {% assign current_collection = collections['roost-hooks-racks'] %}
+  {% elsif type contains 'Fireplace Accessories' or type contains 'Minerals and Stones' and collections['roost-stones-minerals'].products.size > 0 %} {% assign current_collection = collections['roost-stones-minerals'] %}
+  {% elsif type contains 'Pillows' and collections['roost-pillows'].products.size > 0 %} {% assign current_collection = collections['roost-pillows'] %}
+  {% endif %}
+{% endif %}
+{% if collections[v_typehandle].products.size > 0 %}
+	{% assign  v_start = 1  %}
+{% else %}
+	{% assign v_start = 14 %}
+{% endif %}
+{%capture 'more_options'%}
+  {%if color_count > 1  %}
+    {%if product.options.size > 1 %}
+    <a href="{{ product.url }}">
+      <label class="moreoptions">More Options »</label>
+    </a>
+    {%endif%}
+  {%else%}
+    {%if product.options.size > 0 and product.variants.size > 1 %}
+    <a href="{{ product.url }}">
+      <label class="moreoptions">More Options »</label>
+    </a>
+    {%endif%}
+  {%endif%}
+{%endcapture%}
+
+{% if current_collection.products.size > 0 %}
+<!-- <h2 class="sub_title">More by {{product.vendor}}</h2> -->
+
+ 
+   <div class="product-list product-list--vertical product-list--scrollable">
+    {% for product in current_collection.products offset:v_start %}
+  
+  {% if  forloop.length > 15 %}
+    {% if forloop.index0 > 8 %}
+    
+     {% if  forloop.index0  < number_of_related_products_to_show and c_product != product.handle %}
+       
+<!--            <div class="product-list product-list--vertical product-list--scrollable"> -->
+         
+            {%- render 'product-item', product: product, grid_classes: '1/4--lap 1/6--desk 1/6--wide', show_add_to_cart: section.settings.show_quick_buy -%}
+            
+          
+<!--           </div> -->
+    
+        {% assign related_counter = related_counter | plus: 1 %}
+      {% endif %}
+    
+    
+    
+    {% endif %}
+    {% else %}
+    {% if  forloop.index0  < number_of_related_products_to_show and c_product != product.handle %}
+      
+         
+           {%- render 'product-item', product: product, grid_classes: '1/4--lap 1/6--desk 1/6--wide', show_add_to_cart: section.settings.show_quick_buy -%}
+       
+        {% assign related_counter = related_counter | plus: 1 %}
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+    </div>
+  
+
+<div class="view_all_products hidden-lap-and-up rte"><a href="{{current_collection.url}}">View More by {{current_collection.title}}</a></div>
+<!-- <style>
+.template-product #more_vendor .spr-badge-caption { display: inline-block; font-size: 13px; display: none; }
+.template-product #more_vendor .more-review {  padding: 10px 0;}
+.template-product #more_vendor .moreoptions { font-size: 14px; background: none; left:0; }
+.template-product #more_vendor .spr-badge{ position: absolute;bottom: 12px;right: 15px;text-align: right;}
+</style> -->
+
+{% endif %}
+      </div>
+    </div>
+
+  
+  </section>
+
+  {%- comment -%}
+  --------------------------------------------------------------------------------------
+  QUICK VIEW CONTAINER
+  --------------------------------------------------------------------------------------
+  {%- endcomment -%}
+
+  <div id="modal-quick-view-{{ section.id }}" class="modal" aria-hidden="true">
+    <div class="modal__dialog modal__dialog--stretch" role="dialog">
+      <button class="modal__close link" data-action="close-modal" title="{{ 'general.accessibility.close' | t | escape }}">
+        {%- render 'icon', icon: 'close' -%}
+      </button>
+
+      <div class="modal__loader">
+        {%- render 'icon', icon: 'search-loader' -%}
+      </div>
+
+      <div class="modal__inner"></div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "More By Vendor",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Section will only be visible if you have seen at least one product."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sectiona",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "More by Vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_buya",
+      "label": "Show quick buy",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

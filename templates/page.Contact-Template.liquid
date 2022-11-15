@@ -1,0 +1,77 @@
+<!-- Template Add For Trade Page By Puneet ID-100 -->
+<div class="container">
+  <br>
+<header class="page__header--centered title-css">
+  <center> <h1 class="section__title heading h1">{{ page.title }}</h1> </center>
+
+
+</header>
+
+<div class="" style=" padding: 17px;">
+  {%if page.handle == "contact-us" or page.handle == "trade-programs" %}<h2 class="link" style="text-align:center;">Here are our contact details. You can reach us via email, chat or phone as needed. Or fill out the contact form below.</h2>{%endif%}
+  <div class="layout">
+<!--       <div class="container"> -->
+     <div>
+    <div class="mosaic mosaic--medium mosaic--three-columns" >
+  	
+			<!--      Footer page sidebar   -->
+     		 {% include 'footer-page-sidebar'%}
+      
+           <div class="mosaic__column rte" style="background:white">
+    			{{ page.content }}
+  		   </div>
+         <br/>
+<!--        Form is added to below div  -->
+      {%if page.handle == "contact-us" %}
+     
+        <div class="mosaic__column" style="background:white">
+          <div class="contact-form">
+<!-- 			<div id="wufoo-z4efban1d8pt2u"> Fill out my <a href="https://modishhomegarden.wufoo.com/forms/z4efban1d8pt2u">online form</a>. </div> <script type="text/javascript"> var z4efban1d8pt2u; (function(d, t) { var s = d.createElement(t), options = { 'userName':'modishhomegarden', 'formHash':'z4efban1d8pt2u', 'autoResize':true, 'height':'580', 'async':true, 'host':'wufoo.com', 'header':'show', 'ssl':true }; s.src = ('https:' == d.location.protocol ?'https://':'http://') + 'secure.wufoo.com/scripts/embed/form.js'; s.onload = s.onreadystatechange = function() { var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return; try { z4efban1d8pt2u = new WufooForm(); z4efban1d8pt2u.initialize(options); z4efban1d8pt2u.display(); } catch (e) { } }; var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr); })(document, 'script'); </script> -->
+      <div id="wufoo-z4efban1d8pt2u"> Fill out my <a href="https://modishhomegarden.wufoo.com/forms/z4efban1d8pt2u">online form</a>. </div> <script type="text/javascript"> var z4efban1d8pt2u; (function(d, t) { var s = d.createElement(t), options = { 'userName':'modishhomegarden', 'formHash':'z4efban1d8pt2u', 'autoResize':true, 'height':'580', 'async':true, 'host':'wufoo.com', 'header':'show', 'ssl':true }; s.src = ('https:' == d.location.protocol ?'https://':'http://') + 'secure.wufoo.com/scripts/embed/form.js'; s.onload = s.onreadystatechange = function() { var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return; try { z4efban1d8pt2u = new WufooForm(); z4efban1d8pt2u.initialize(options); z4efban1d8pt2u.display(); } catch (e) { } }; var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr); })(document, 'script'); </script>
+          </div>
+      </div>
+      {% elsif page.title == "Modish Trade Programs" %}
+      
+      	<div class="mosaic__column" style="background:white;padding: 35px;">
+          
+             <div id="wufoo-s1x6n40j0i6zjs4"> Fill out my <a href="https://modishhomegarden.wufoo.com/forms/s1x6n40j0i6zjs4">online form</a>. </div> <script type="text/javascript"> var s1x6n40j0i6zjs4; (function(d, t) { var s = d.createElement(t), options = { 'userName':'modishhomegarden', 'formHash':'s1x6n40j0i6zjs4', 'autoResize':true, 'height':'1028', 'async':true, 'host':'wufoo.com', 'header':'show', 'ssl':true }; s.src = ('https:' == d.location.protocol ?'https://':'http://') + 'secure.wufoo.com/scripts/embed/form.js'; s.onload = s.onreadystatechange = function() { var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return; try { s1x6n40j0i6zjs4 = new WufooForm(); s1x6n40j0i6zjs4.initialize(options); s1x6n40j0i6zjs4.display(); } catch (e) { } }; var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr); })(document, 'script'); </script>
+      </div>
+          {%endif%}
+        
+
+
+        </div>
+        </div>
+    </div>
+  </div>
+ </div>
+<style>
+  #main{
+  background: #fff;}
+/*   .container{
+  max-width:1024px;} */
+  #btn {
+    background-color: #736950;
+    padding: 8px 20px;
+    line-height: 1.42;  
+    cursor: pointer;
+    font-family:"Basic Commercial", sans-serif;
+    color: white;
+}
+  .contact-form{
+    padding: 20px;
+   
+    margin-top: 11px;
+  }
+  .title-css{
+     color: #221f1f;
+    text-transform: capitalize;
+    background-color: #f2f2f2;
+    /* color: #636363; */
+    font-size: 24px;
+    font-weight: 700;
+    padding: 7px;
+    text-align: center;
+  }
+  
+</style>

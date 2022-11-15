@@ -1,0 +1,73 @@
+<div class="layout__section layout__section--secondary hidden-pocket">
+ 
+	<div class="card card--sticky"> 
+      
+       <div class="card__section card__section--tight">
+         
+         
+         {%if request.page_type == 'page' %}
+         <div style="float:right;">
+           
+           <a href="https://www.modishstore.com/" >Home&nbsp;&nbsp;&nbsp;</a>
+           <a href="/pages/about-us" >Back</a></div>
+          <p class="card__title--small heading">Links </p> 
+         {%- elsif request.page_type == 'blog' or request.page_type == 'article' -%}
+        
+          <p class="card__title--small heading">Latest Posts </p>
+         
+         {%endif%}
+          
+         
+       	  <div class="collection__filter-group-list ">
+          {%if request.page_type == 'blog' or request.page_type == 'article' %}
+          {% for article in blog.articles %} 
+          <div class="collection__filter-group">
+          {%- render 'icon', icon: 'arrow-right' -%} <a href="{{article.url}}" class="link link--secondary">{{ article.title }}</a> 
+          </div>
+            {% endfor %}
+            
+            
+            
+          {%elsif  request.page_type == 'page'%}
+          
+                  {%if page.handle == "frequently-asked-questions-w"%}
+
+                  <div class="collection__filter-group"><a href="/pages/frequently-asked-questions-w#ordering" class="link link--secondary text--strong ">Ordering</a></div>
+                  <div class="collection__filter-group"><a href="/pages/frequently-asked-questions-w#shipping" class="link link--secondary text--strong ">Shipping</a> </div>
+                  <div class="collection__filter-group"><a href="/pages/frequently-asked-questions-w#international-shipping--alaska--hawaii" class="link link--secondary text--strong ">International Shipping</a> </div>
+                  <div class="collection__filter-group"><a href="/pages/frequently-asked-questions-w#cancellations-&-returns" class="link link--secondary text--strong ">Cancellations &amp; Returns</a> </div>
+                  <div class="collection__filter-group"><a href="/pages/frequently-asked-questions-w#financing-options" class="link link--secondary text--strong ">Financing Options</a> </div>
+                  <div class="collection__filter-group"><a href="/pages/frequently-asked-questions-w#other-questions" class="link link--secondary text--strong ">Other Questions</a></div>
+                  {%elsif page.handle == "modish-green-initiative-sustainable-recycled" %}
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#topCollections" class="link link--secondary text--strong">Mission</a></div>   
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#faq" class="link link--secondary text--strong">Project</a></div>
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#buying_guides" class="link link--secondary text--strong">Share</a></div>
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#faq" class="link link--secondary text--strong">FAQ</a></div>
+                  {% elsif template == "page.buying-guides" %}
+
+                  {% if page.handle != 'outdoor-and-patio-furniture-w' or page.handle != 'garden-age-supply-w' %}
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#topCollections" class="link link--secondary text--strong">Top Collections</a></div>
+                  {%endif%}
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#faq" class="link link--secondary text--strong">FAQ</a></div>
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#buying_guides" class="link link--secondary text--strong">Buying Guides</a></div>
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#care" class="link link--secondary text--strong">Care &amp; Maintainence</a></div>
+                  <div class="collection__filter-group"><a href="/pages/{{page.handle}}#tag_cloud" class="link link--secondary text--strong">Tag Cloud</a></div>
+                 {%else%}
+                  <div class="collection__filter-group"><a href="/pages/about-us" class="collection__filter-group-name link link--secondary text--strong ">About</a></div>
+                  <div class="collection__filter-group"><a href="/pages/copy-of-why-shop-modish-2" class="collection__filter-group-name link link--secondary text--strong">Why Shop Modish</a></div>
+                  <div class="collection__filter-group"><a href="/pages/frequently-asked-questions-w" class="collection__filter-group-name link link--secondary text--strong ">FAQs</a></div>
+<!--                   <div class="collection__filter-group"><a href="/pages/press-w" class="collection__filter-group-name link link--secondary text--strong">Press</a></div> -->
+                  <div class="collection__filter-group"><a href="/pages/testimonials" class="collection__filter-group-name link link--secondary text--strong">Testimonials</a></div>
+                  <div class="collection__filter-group"><a href="/pages/contact-us" class="collection__filter-group-name link link--secondary text--strong  ">Contact Us</a></div>
+                  <div class="collection__filter-group"><a href="/pages/copy-of-modish-trade-program" class="collection__filter-group-name link link--secondary text--strong ">Trade Program</a></div>
+                  <div class="collection__filter-group"><a href="/pages/modish-store-artisan-living-brand" class="collection__filter-group-name link link--secondary text--strong ">Artisan Living</a></div>
+
+                  <div class="collection__filter-group"><a href="/pages/copy-of-brands-2" class="collection__filter-group-name link link--secondary text--strong">Shop By Brands</a></div>
+                  {%endif%}
+          {%endif%}
+        </div>
+     </div>
+       
+	</div>
+       
+ </div>

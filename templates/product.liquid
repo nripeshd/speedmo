@@ -1,0 +1,114 @@
+{%- comment -%}
+If the product contains the special __gift tag, we prevent it to be completely accessible by redirecting to the home page
+{%- endcomment -%}
+
+{%- if product.tags contains '__gift' -%}
+  <script>
+    window.location.href = '/';
+  </script>
+{%- else -%}
+  {% section 'product-template' %}  
+  {% section 'static-promotion-list' %}
+  {% section 'product-recommendations' %}
+ {% section 'product-by-type' %}
+{% section 'static-recently-viewed-products' %}
+  {% section 'MorebyVendor' %}
+
+<!-- linking announcement bar text to block in the page id=76 -->
+<span id="ship_announcement"></span>
+<!-- Related Searches added start -->
+          <div class="container">
+        
+            <header class="section__header"> <h2 class="section__title heading h3">Related Searches</h2></header>
+        
+          <p class="related-searches-link">
+         {% assign vendorhandle = product.vendor | handleize %}
+        {% assign typehandle = product.type | handleize %}
+        {% if collections[typehandle].products.size > 0 %}
+          {% assign current_collection = collections[typehandle] %}
+        {% else %}
+          {% for collection in collections %}
+            {% if collection.title contains current_product.type %}
+               {% assign current_collection = collection %}
+            {% endif %}
+          {% endfor %}
+          {% if current_collection.products.size < 0 %}
+            {% if collections[vendorhandle].products.size > 0 %}
+              {% assign current_collection = collections[vendorhandle] %}
+            {% else %}
+              {% assign current_collection = product.collections.first %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+        {% capture collectionProduct %}
+        {% for colle_product in current_collection.products %}
+            {% if colle_product.handle == product.handle %}
+                {% assign currentProductCount = forloop.index %}
+            {% endif %}
+            {{ colle_product.handle }} , 
+        {% endfor %}
+        {% endcapture %}
+        {% assign productTotal    = collectionProduct | split:' ,' %}
+        {% assign previousProduct = currentProductCount  | minus: 2 %}
+        {% assign nextProduct     = currentProductCount %}
+        {% assign collectionTotalProduct = current_collection.products.size %}
+        <!----- End Previous Next ---->
+         {% assign pvenderhandle = product.vendor | handle %}
+        {% assign related_current_collection = current_collection  %} 
+        {% capture related_searches %}
+
+        {% for product_vendor in related_current_collection.all_vendors %}
+          {% if product_vendor != product.vendor %}
+            {% assign coll_handle =  product_vendor | handleize | append:'-' | append: product.type | handleize  %}
+            {% if collections[coll_handle].products.size > 0 %}
+
+                <a href="{{shop.secure_url}}/collections/{{ product_vendor | handleize }}-{{ product.type | handleize }}" class="round_btn link" target="_blank">
+                  {{ product_vendor }}
+                  {{ product.type }}</a>
+
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% endcapture %}
+
+        {{ related_searches | strip | strip_newlines }}
+          </p>
+        </div>
+ 		<style>
+          .related-searches-link{
+           text-align: justify;
+          }
+        .round_btn {
+            background: #ccc;
+            padding: 5px 15px;
+            display: inline-block;
+            border-radius: 20px;
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+          
+          @media screen and (max-width: 700px){
+             .round_btn {           
+            padding: 3px 10px;           
+            border-radius: 15px;            
+            margin-bottom: 5px;
+            font-size: 12px;
+            
+        } .related-searches-link{
+           text-align: center;
+          }
+          
+            
+            
+          }
+        </style>
+
+<!-- Related Searches added end -->
+
+  <script>
+    window.ShopifyXR=window.ShopifyXR||function(){(ShopifyXR.q=ShopifyXR.q||[]).push(arguments)};
+    ShopifyXR('addModels', {{ product.media | where: 'media_type', 'model' | json }});
+  </script>
+{%- endif -%}

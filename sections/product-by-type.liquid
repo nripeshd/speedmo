@@ -1,0 +1,156 @@
+{%- if section.settings.show_sectiona -%}
+  {%- capture section_settings -%}
+  {
+    "currentProductId": {{ product.id | json }}
+  }
+  {%- endcapture -%}
+
+  <section class="section" data-section-id="{{ section.id }}" data-section-type="morebyvendor" data-section-settings='{{ section_settings }}'>
+    <div class="container">
+      {%- if section.settings.title != blank -%}
+        <header class="section__header">
+          {% assign number_of_related_products_to_show = 19 %}
+          {% assign related_counter = 0 %}
+          {% assign image_size = 'large' %}
+          {% assign c_product = product.handle %}
+          {% assign vendor_handle = product.vendor | handle %}
+          {% assign current_collection = collections[vendor_handle] %}
+            {% if current_collection.products.size > 0 %}
+          	<h2 class="section__title heading h3">You May Also Like</h2>
+<!--             <div class="view_all_products hidden-pocket rte"><a href="{{current_collection.url}}" class="link">View More by {{current_collection.title}}</a></div> -->
+               {%- endif -%}
+
+        </header>
+   {%- endif -%}
+<!--     </div> -->
+        
+  <div class="product-list product-list--vertical product-list--scrollable">     
+     {%assign counter=1%}
+  
+    
+   
+    {% assign product_handle_string = product.handle%}
+    {% for collectiona in product.collections %}   
+    
+     	{% for producta in collectiona.products %} 
+          {% if counter>6%}
+          {%break%}
+          {%endif%}
+    
+    	{%if product_handle_string contains producta.handle %}         
+    	{%else%}
+              {%if producta.type==product.type and producta.vendor==product.vendor and producta.available and producta.handle != product.handle%}      
+              
+    			  {%- render 'product-item', product: producta, grid_classes: '1/4--lap 1/6--desk 1/6--wide'-%}
+    {%assign counter=counter |plus:1%}    
+                   {%- assign product_handle_string = product_handle_string| append: producta.handle -%}
+              {%endif%}    
+       {%endif%}   
+	 {% endfor %}
+	{% endfor %}
+      
+    
+             {% if counter<6%}
+                {% for collectiona in product.collections %} 
+                 {% for producta in collectiona.products %} 
+                  {% if counter>6%}
+                  {%break%}
+                  {%endif%}
+    
+    {%if product_handle_string contains producta.handle %}
+         
+    {%else%}
+    {%if producta.type==product.type and producta.vendor=="Artisan Living" and producta.available and producta.handle != product.handle%}      
+<!--                   {{counter}}-<a href="{{producta.url}}">{{producta.title}}</a><br> -->
+       {%- render 'product-item', product: producta, grid_classes: '1/4--lap 1/6--desk 1/6--wide', show_add_to_cart: section.settings.show_quick_buy -%}
+                  {%assign counter=counter |plus:1%}  
+     {%- assign product_handle_string = product_handle_string| append: producta.handle -%}
+                  {%endif%}
+    {%endif%}
+    
+
+                  
+
+                 {% endfor %}
+         	 {% endfor %}
+      
+     {%endif%}
+
+     {% if counter<6%}
+                {% for collectiona in product.collections %} 
+                 {% for producta in collectiona.products %} 
+                  {% if counter>6%}
+                  {%break%}
+                  {%endif%}
+    
+     {%if product_handle_string contains producta.handle %}
+         
+     {%else%}
+    
+                  {%if producta.type==product.type and producta.available and producta.handle != product.handle%}      
+<!--                   {{counter}}-<a href="{{producta.url}}">{{producta.title}}</a><br> -->
+       {%- render 'product-item', product: producta, grid_classes: '1/4--lap 1/6--desk 1/6--wide', show_add_to_cart: section.settings.show_quick_buy -%}
+                  {%assign counter=counter | plus:1 %}   
+     {%- assign product_handle_string = product_handle_string| append: producta.handle -%}
+                  {%endif%}
+
+     {%endif%}
+    
+
+                 {% endfor %}
+         	 {% endfor %}
+      
+     {%endif%}
+	 
+	 
+	 
+	 
+	 
+      
+
+      
+      </div>  
+      
+      
+    </div>
+
+  
+  </section>
+
+  {%- comment -%}
+  --------------------------------------------------------------------------------------
+  QUICK VIEW CONTAINER
+  --------------------------------------------------------------------------------------
+  {%- endcomment -%}
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "New You May Also Like",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Section will only be visible if you have seen at least one product."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sectiona",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "More by Vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_buya",
+      "label": "Show quick buy",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

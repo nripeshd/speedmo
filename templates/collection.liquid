@@ -1,0 +1,62 @@
+{% section 'collection-template' %}
+{% section 'static-promotion-list' %}
+{% section 'static-recently-viewed-products' %}
+<span id="ship_announcement"></span>
+{% assign collection_handle = "driftwood,bamboo,recycled,Rugs,ceiling,walldecor,candle,tv-panel,armchairs,bar-carts,cafe-bar-tables-stools,bar-stools,baskets-bowls-buckets,bedroom-set,beds,beverage-dispensers,book-boxes,bookcases,bookends,botanicals,bowls,cabinets,candelabra,ceiling-lamp,chandeliers,closets,coat-racks,coffee-end-table,console-tables,counter-stools,cutting-serving-boards,decanters-wine-racks,jars-and-canisters-and-bottles,decorative-pillows ,desk-accessories,desk-lamps,desks,dining-sets,dining-tables,dining-chairs,dinnerware,display-cases,drawers,dresser,fireplace-accessories,flasks,floor-lamps,frames,glass-terrariums,glassware,grills-accessories,headboards,holiday,home-accents,shelves-hooks-racks,ice-party-buckets,living-room,roost-kitchen-entertaining-wine-bar-cart-decanters,lighting,furniture,roost-boatwood-collection,roost-wall-decor-shelves-hooks-crate-wall-display,roost-home-accessories-fireplace,go-home-chairs,accent-chairs,kids-chairs,kitchen-accessories,lanterns,lightbulbs,light-strands,lippa-collection,outdoor-recliners-lounge-chairs,loveseats,mattresses,stones-minerals,mirrors,modway-empress-collection,modway-engage-collection,modway-drive-tables,nesting-tables,nightstands,office-accessories,office-chairs,office-chairmats,office-storage,ottoman,outdoor-chairs,outdoor-decor,outdoor-dining-chairs,outdoor-dining-set,indoor-outdoor-furniture,outdoor-ottoman,outdoor-patio-daybed,patio-furniture,pendant-lamps,pillows,planters-troughs-cachepots,poufs,pub-tables,chairs-recliners,room-divider,roost-constellation-collection,sconces,sculptures,shelfs,shelving-units,sofas,stools,table-lamps,throws,totes,trays,trophy-heads,tv-stands,vases,wall-art,wall-lights,wine-bar-accessories,wine-storage,work-tables,live-edge-collection,porthole-mirrors,deer-head,roost-furniture-cabinet-trunks-crates,side-tables" | split :',' %}
+{% assign partialFound = false %}
+
+{% for partial in collection_handle  %}
+
+  {% if collection.handle contains partial %}
+    {% assign partialFound = true %}
+	
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if partialFound %}
+<div class="container">
+  
+  <header class="section__header">
+          <h2 class="section__title heading h3">Related Searches</h2>
+  </header>
+  
+    <div class="recently-viewed-products-placeholder">  
+      <p>
+
+		{%include 'relatedsearch-CollectionCloud'%}
+        {%include 'relatedsearch-CollectionCloud-two'%}
+      </p>
+  	</div>
+</div>
+ 		<style>
+          .recently-viewed-products-placeholder{
+          text-align: justify;}
+        .round_btn {
+            background: #ccc;
+            padding: 5px 15px;
+            display: inline-block;
+            border-radius: 20px;
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+          
+          @media screen and (max-width: 700px){
+             .round_btn {           
+            padding: 3px 10px;           
+            border-radius: 15px;            
+            margin-bottom: 5px;
+            font-size: 12px;
+            
+        }
+             .recently-viewed-products-placeholder{
+          text-align: center;}
+          
+            
+            
+          }
+        </style>
+{%endif%}
+<!-- Related Searches added end -->

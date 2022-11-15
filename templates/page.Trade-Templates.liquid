@@ -1,0 +1,89 @@
+<!-- Template Add For Trade Page By Puneet ID-100 -->
+
+<style>
+  .collection__description p a{
+     color: #da6300;
+  }
+.title-css{
+ color: #221f1f;
+    text-transform: capitalize;
+    background-color: #f2f2f2;
+    /* color: #636363; */
+    font-size: 24px;
+    font-weight: 700;
+    padding: 7px;
+    text-align: center;
+  
+  }
+  .alink{
+    
+    color: var(--link-color);
+    text-decoration: var(--text-link-decoration);
+    text-underline-position: under;
+  
+  
+  }
+   .ques {
+    /* padding: 10px; */
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 0;
+    background-color: #f3f3f3;
+    padding: 7px 15px 7px 15px;
+    cursor: pointer;
+    position: relative;
+    text-transform: initial;
+}
+</style>
+
+<header class="page__header page__header--centered title-css">
+    <h1 class="page__title heading h1">{{ page.title }}</h1>
+  {%- if page.title == "Modish Trade Programs" -%}
+  <p class="link">Here are our contact details. You can reach us via email, chat or phone as needed. Or fill out the contact form below.</p>{%- endif -%}
+  
+</header>
+<div class="" style="padding: 17px;">
+<div class="layout">
+     <!--      Footer page sidebar   -->
+     	 {%- include 'footer-page-sidebar' -%}
+<!--       <div class="product-list product-list--collection product-list--with-sidebar">
+    <div class="product-item product-item--vertical  1/2--tablet-and-up 1/2--desk" >
+           <div class="page__content rte"> -->
+                <div class="layout__section" style= "background:white">
+                  <div class="collection">
+                     <div class="card__header card__header--tight">
+                  <div class="collection__description">
+                   
+                    
+                    
+                    {%- if page.handle == 'copy-of-testimonials-2' -%}
+                    
+                    	<div class="text-with-icons">
+                         {{ page.content }}
+                      </div>
+                    {%- section 'Testimonials' -%}
+                    
+                    {%- else -%}
+                     {{ page.content }}
+                    {%- endif -%}
+                    
+                    <div class="card">
+                    </div> 	
+                    </div>
+                  </div>
+                  </div>	
+                </div>  
+  
+  
+  
+  
+<!--   </div>
+        </div>
+
+
+      </div> -->
+</div>
+
+
+</div>
+

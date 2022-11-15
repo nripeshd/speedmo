@@ -1,0 +1,465 @@
+<!--Tejashwani 07/01/2020 Start: This page is no where usable  --> 
+<div class="container">
+  <div class="collection__meta-inner">
+  
+<div class="" style="display:block;margin-bottom:5px;">
+  
+<div class="customselect">
+  <lable>Filter By</lable> 
+    {%comment%}<a href="javascript:void(0)" class="closeCollectionFilters">Back <i class="icon_back_right"></i></a>  {%endcomment%}
+  {% comment %} 
+  {% if current_tags %}
+  <a href="https://www.modishstore.com/collections/{{ collection.handle }}" class="clearfilter" title="Clear filter">Clear All &#xd7;</a>
+  {% endif %}
+  {% endcomment %}
+</div>
+{% assign Allcolors = 'Blue, Black, Brown, Beige, Chrome, Clear, Cherry, Cappuccino, Coffee, Cream, Fruitwood, Grey, Green, Gold, Multicolored, Natural, Orange, Purple, Red, Silver, Tan, White, Walnut, Woodgrain, Yellow' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}
+{% assign Allstyle = 'Beach Style, Classic, Contemporary, Country, Eclectic, Industrial, Modern, Rustic, Retro-Modern, Retro-industrial, Traditional, Transitional, Vintage' | replace: ' ,', ','| replace: ', ', ','| split: ',' %} 
+{% assign Allmaterials = 'Acrylic, Aluminium, Bamboo, Clay, Ceramic, Copper, Concrete, Fabric, Foam, Fiberglass, Fiberboard, Fibreglass, Glass, Hide, Iron, Leather, Metal, Mdf, Marble, Others, Oak, Polypropylene, Plastic, Resin, Rattan, Stone, Synthetic Leather, Steel, teakwood, Upholstered, Veneer, Vinyl, Wood, Zinc' | replace: ' ,', ','| replace: ', ', ','| split: ',' %} 
+{% assign Allshape = 'Free Form, Oval, Rectangle, Round, Square, Specialty' | replace: ' ,', ','| replace: ', ', ','| split: ',' %} 
+{% assign Allpattern = 'Floral, Geometric, Print, Solid, Striped, Transparent' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}   
+{% assign Backheight = 'High Back, Low Back, Mid Back' | replace: ' ,', ','| replace: ', ', ','| split: ',' %}       
+{% assign Allvendor = '2-Day Designs, A&B Home, Accent Decor, Aeon Furniture, Aire Furniture, All Things Cedar, Anji Mountain, Anywhere Fireplace, Antlerworx, Aron Living, Art Classics, Artisan Living, Authentic Models, Bey-Berk, Boraam, Cal Lighting, Captiva, Ceets, Control Brand, Cyan Design, Dimond Home, Dimond Lighting, Drift Home, EdgeMod Furniture, Edloe Finch, ELK Lighting, Emerald Home Furnishings, Enrico, Fine Mod Imports, Fine Mode Imports, Flash Furniture, Four Hands, Furniture of America, Garden Age Supply, Global Views, Gold Leaf Design Group, Greenington, Guild Master, Go Home, Haussmann, Hi-Line Gift Ltd., HomArt, Interior Illusions Plus, International Home Miami, Jofran, Kalalou, Kidsmill Furniture, Kube Import, Lamp Works, Leftbank Art, Light & Contrast, Loom & Mill, LumiSource, Manhattan Comfort, Masaya & Co, Mirror Masters, Misc, Mod Made, Modish, Modish Store, Modloft, Modway, Moes Home Collection, Nanoworks, Napa Home and Garden, North Teak, Oohlong, Oggetti, Padmas Plantation, Picnic Time, Plata Import, Pomeroy, Primo, Roost, Safavieh, Saro, Screen Gems, Selamat, Shiraleah, Sika, Skyline Furniture, Stein World, Sterling Industries, Strata Furniture, Surya, Tag Furnishings Group, Teton Home, Texture Designideas, The HomePort Collections, Three Hands, Tozai, Tozai Home, Trans-Ocean, Twos Company, Umbra, URBN, Uttermost, Vagabond Vintage, Vita Lighting, Whiteline, Whitney Brothers, Z-Line Designs, Zodax, Zuo, Zuo Modern' | replace: ' ,', ','| replace: ', ', ','| split: ',' %} 
+{% assign Alldiscount = 'DISCOUNT' %}
+  <div id="collectionFilters">
+
+<div class="materialsf selectcontainer">
+  <h3>Materials</h3>
+  <ul>
+  <li class="clearfix filter">  
+    <div class="three columns coll-filter" id="materialsFiltercheck">
+      <input class="filter_search" type="text" placeholder="Search..">
+      {% for tag in Allmaterials %}
+      
+      	{% assign tagHandle = tag  %}
+      {% if collection.all_tags contains tag %}
+        {% if current_tags contains tagHandle %}
+      
+      
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" checked ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% else %}
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% endif %}
+        {% endif %}
+      
+      
+      
+      {% endfor %}
+    </div>
+  </li>  
+</ul>
+</div> 
+<div class="shapef selectcontainer">
+   <h3>Shapes</h3>
+  <ul>
+  <li class="clearfix filter">  
+      		
+    <div class="three columns coll-filter" id="shapeFiltercheck">
+       <input class="filter_search" type="text" placeholder="Search..">
+      {% for tag in Allshape %}
+      	{% assign tagHandle = tag | handle %}
+      	 {% if collection.all_tags contains tag %}
+      		{% if current_tags contains tagHandle %}
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" selected><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% else %}
+      <div class="filtercheckboxblock">	<input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% endif %}
+        {% endif %}
+      {% endfor %}
+    
+    </div>
+    
+  </li>
+</ul>
+</div>
+<div class="colorf selectcontainer">
+  <h3>Colors</h3>
+  <ul>
+  <li class="clearfix filter">  
+    <div class="three columns coll-filter" id="colorFilter">
+       <input class="filter_search" type="text" placeholder="Search..">
+      {% for tag in Allcolors %}
+      {% assign tagHandle = tag | handle %}
+      {% assign current_alltag = current_tags | downcase %}
+      {% if collection.tags contains tag %}
+      {% if current_alltag contains tagHandle %}
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="radio_{{ tag | handle }}" checked="checked" >
+        <label class="css-label current" for="radio_{{ tag | handle }}"> {{ tag }}</label></div>
+      {% else %}
+      <div class="filtercheckboxblock">
+        <input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" >
+        <label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    
+    </div>
+    
+  </li>
+</ul>
+</div>   
+
+  {% comment %}
+  <div class="colorf selectcontainer">
+    <h3>Colors</h3>
+    <ul>
+      <li class="clearfix filter">  
+        <div class="three columns coll-filter" id="colorFilter">
+          {% for tag in Allcolors %}
+          {% assign tagHandle = tag  %}
+          {% if collection.tags contains tag %}
+          {% if current_tags contains tagHandle %}
+          <div class="color-f">
+            <input type="checkbox" value="{{ tag | handle }}" id="radio_{{ tag | handle }}"  checked="checked"  class="css-radiobutton 123"/>
+            <div class="fcoloroptions">
+              <label for="radio_{{ tag | handle }}" class="{{ tag | handle }}" title="{{ tag }}"> </label>
+            </div>
+          </div>
+          {% else %}
+          <div class="color-f">
+            <input type="checkbox" value="{{ tag | handle }}" id="radio_{{ tag | handle }}" class="css-radiobutton"/>
+            <div class="fcoloroptions">
+              <label for="radio_{{ tag | handle }}" class="{{ tag | handle }}" title="{{ tag }}"> </label>
+            </div>
+          </div>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+
+        </div>
+
+      </li>
+    </ul>
+  </div> 
+  {% endcomment %}
+<div class="patternf selectcontainer">
+  <h3>Patterns</h3>
+  <ul>
+  <li class="clearfix filter">  
+    <div class="three columns coll-filter" id="patternFiltercheck">
+       <input class="filter_search" type="text" placeholder="Search..">
+      {% for tag in Allpattern %}
+      	{% assign tagHandle = tag | handle %}
+      	{% if collection.tags contains tag %}
+      		{% if current_tags contains tagHandle %}
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" selected><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% else %}
+      <div class="filtercheckboxblock">		<input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% endif %}
+        {% endif %}
+      {% endfor %}
+    
+    </div>
+    
+  </li>
+</ul>
+</div> 
+  <div class="stylef selectcontainer">
+    <h3>Styles</h3>
+    <ul>
+      <li class="clearfix filter"> 
+        <div class="three columns coll-filter" id="styleFiltercheck">
+           <input class="filter_search" type="text" placeholder="Search..">
+          {% for tag in Allstyle %}
+          {% assign tagHandle = tag | handle %}
+          {% if collection.tags contains tag %}
+          {% if current_tags contains tagHandle %}
+          <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" selected><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+          {% else %}
+          <div class="filtercheckboxblock">		<input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  {% if collection.title contains 'Office Chairs' %}
+  <div class="backheight selectcontainer">
+  <h3>Back Height</h3>
+    <ul>
+      <li class="clearfix filter"> 
+        <div class="three columns coll-filter" id="backheight">
+           <input class="filter_search" type="text" placeholder="Search..">
+          {% for tag in Backheight %}
+          {% assign tagHandle = tag | handle %}
+          {% if collection.tags contains tag %}
+          {% if current_tags contains tagHandle %}
+          <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" selected><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+          {% else %}
+          <div class="filtercheckboxblock  {{ tag }}"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+  
+  <div class="vendorsf selectcontainer">
+  <h3>Brands</h3>
+  <ul>
+  <li class="clearfix filter">  
+    <div class="three columns coll-filter" id="vendorsFiltercheck">
+       <input class="filter_search" type="text" placeholder="Search..">
+      {% for tag in Allvendor %}
+      	{% assign tagHandle = tag  %}
+      	{% if collection.tags contains tag %}
+      		{% if current_tags contains tagHandle %}
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" checked ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% else %}
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </li>  
+</ul>
+</div> 
+    
+<div class="vendorsf selectcontainer">
+  <h3>Discount</h3>
+  <ul>
+  <li class="clearfix filter">  
+    <div class="three columns coll-filter" id="vendorsFiltercheck">
+       <input class="filter_search" type="text" placeholder="Search..">
+      {% for tag in Alldiscount %}
+      	{% assign Alldiscount = tag  %}
+      	
+      		{% if current_tags contains Alldiscount %}
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" checked ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% else %}
+      <div class="filtercheckboxblock"><input type="checkbox" class="css-checkbox" value="{{ tag | handle }}" id="{{ tag | handle }}" ><label class="css-label" for="{{ tag | handle }}"> {{ tag }}</label></div>
+      		{% endif %}
+       
+      {% endfor %}
+    </div>
+  </li>  
+</ul>
+</div> 
+  
+  </div>
+  {% comment %}
+  <select class="three columns  color-trigger" style="display:none;">
+        <option value="">All colors</option>
+        {% for tag in Allcolors %}
+        {% assign tagHandle = tag | handle %}
+        {% if collection.tags contains tag %}
+        {% if current_tags contains tagHandle %}
+        <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+        {% else %}
+        <option value="{{ tag | handle }}">{{ tag }}</option>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+  </select>
+  <select class="three columns" id="materialsFilter" style="display:none;">
+      
+      {% for tag in Allmaterials %}
+      	{% assign tagHandle = tag | handle %}
+      	{% if collection.tags contains tag %}
+      		{% if current_tags contains tagHandle %}
+      			<option value="{{ tag | handle }}" selected>{{ tag }}</option>
+      		{% else %}
+      			<option value="{{ tag | handle }}">{{ tag }}</option>
+      		{% endif %}
+        {% endif %}
+      {% endfor %}
+    
+    </select>
+  
+  <select class="three columns " id="shapeFilter" style="display:none">
+      <option value="">All Shapes</option>
+      {% for tag in Allshape %}
+      	{% assign tagHandle = tag | handle %}
+      	{% if collection.tags contains tag %}
+      		{% if current_tags contains tagHandle %}
+      			<option value="{{ tag | handle }}" selected>{{ tag }}</option>
+      		{% else %}
+      			<option value="{{ tag | handle }}">{{ tag }}</option>
+      		{% endif %}
+        {% endif %}
+      {% endfor %}
+    
+    </select>
+  <select class="three columns " id="patternFilter" style="display:none;">
+      <option value="">All Patterns</option>
+      {% for tag in Allpattern %}
+      	{% assign tagHandle = tag | handle %}
+      	{% if collection.tags contains tag %}
+      		{% if current_tags contains tagHandle %}
+      			<option value="{{ tag | handle }}" selected>{{ tag }}</option>
+      		{% else %}
+      			<option value="{{ tag | handle }}">{{ tag }}</option>
+      		{% endif %}
+        {% endif %}
+      {% endfor %}
+    
+    </select>
+  <select class="three columns " id="styleFilter" style="display:none;">
+      <option value="">All Styles</option>
+    {% for t in Allstyle %}
+		{% assign tag = t | strip %}
+      
+      {% assign tagHandle = tag | handle %}
+      
+      {% if collection.tags contains tag  %}
+      
+        {% if current_tags contains tagHandle %}
+              <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+        {% else %}
+              <option value="{{ tag | handle }}">{{ tag }}</option>
+        {% endif %}
+      
+      {% endif %}
+      
+     {% endfor %}
+    
+    </select>
+  <div class="collf selectcontainer changelistandgrid">{% include 'collection-views' %} </div>
+  <div class="selectcontainer sortbypart">{% include 'collection-sorting' %}</div>
+  {% endcomment %}
+  <div class="clear"></div>
+  
+</div>
+</div>
+
+</div>
+ {% for tag in Alldiscount %}
+      	{% assign Alldiscount = tag  %}
+      	{% if collection.tags contains tag %}
+      		{% if current_tags contains Alldiscount %}
+            <style>
+              .sold-out{display:none !important;}
+            </style>
+		{% endif %}
+        {% endif %}
+      {% endfor %}
+
+<script>
+  $(document).ready(function(){
+       
+     $('#collectionFilters .selectcontainer ul, .brandwise-collection .brandwise-list ul').hide();
+         
+  /*  $( ".selectcontainer, .brandwise-list" ).mouseenter(function() {
+        $(this).find('ul').css('display','block');
+      }).mouseleave(function() {
+        $(this).find('ul').css('display','none');
+      });   */
+    
+    if(jQuery(window).width() > 1024){  
+      $( ".selectcontainer, .brandwise-list" ).mouseenter(function() {
+        $(this).find('ul').css('display','block');
+      }).mouseleave(function() {
+        $(this).find('ul').css('display','none');
+      });    
+    }else{    
+      $('.selectcontainer h3').click(function(){ 
+        $('.selectcontainer h3').not(this).parent().find('ul').hide();
+        $('.selectcontainer h3').not(this).parent().removeClass('active');
+         $(this).parent().toggleClass('active'); 
+//         if($(this).parent().hasClass('active')){
+//            $('.selectcontainer').find('ul').hide();
+//            $(this).parent('.active').find('ul').show();
+//         }else{
+//            $(this).parent().find('ul').hide();
+//         }
+         $(this).parent().find('ul').toggle();
+      });
+    }
+
+var allFilters = jQuery('.coll-filter input:checkbox, .coll-picker');
+    allFilters.click(function() {          
+    var newTags = [];
+    jQuery('.coll-filter input:checked').each(function() {
+      if (jQuery(this).val()) {       
+        newTags.push(jQuery(this).val());
+       var get_id_scroll = jQuery(this).val()
+       
+      }
+    });
+    if (newTags.length) {
+    
+      var query = newTags.join('+');
+      if (jQuery('.coll-picker').length) {
+        window.location.href = '/collections/' + jQuery('.coll-picker').val() + '/' + query;                 
+      }else {
+        window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('tag', query);        
+      }
+    }else {
+      if (jQuery('.coll-picker').length) {
+        window.location.href = '/collections/' + jQuery('.coll-picker').val();
+      }else {
+        {% if collection.handle %}
+        window.location.href = '/collections/{{ collection.handle }}';
+        {% elsif collection.products.first.type == collection.title %}
+        window.location.href = '{{ collection.title | url_for_type }}';
+        {% elsif collection.products.first.vendor == collection.title %}
+        window.location.href = '{{ collection.title | url_for_vendor }}';
+        {% endif %}
+      }
+    }
+  });
+    
+    var currentURL = document.URL;
+     var splitedURL_first = currentURL.split("?")[0];
+    
+    var splitedURL = splitedURL_first.split("/");
+    
+    if(splitedURL.length > 5)
+    {
+
+      var currentTags = splitedURL[5].split("+");
+      for(var i=0;i< currentTags.length;i++)
+      {
+        $('#materialsFiltercheck #'+currentTags[i]).prop('checked', true);
+        $('#shapeFiltercheck #'+currentTags[i]).prop('checked', true);
+        $('#patternFiltercheck #'+currentTags[i]).prop('checked', true);
+        $('#styleFiltercheck #'+currentTags[i]).prop('checked', true);
+        $('#backheight #'+currentTags[i]).prop('checked', true);
+        $('#vendorsFiltercheck #'+currentTags[i]).prop('checked', true);
+      }
+    }
+    if($('#colorFilter input').length == 0){
+    	 $(".colorf").hide();  
+    } 
+    if($('#materialsFiltercheck input').length == 0){
+    	 $(".materialsf").hide();  
+    }
+    if($('#styleFiltercheck input').length == 0){
+   	  	$(".stylef").hide();  
+    }
+    if($('#backheight input').length == 0){
+       $(".backheight").hide();  
+    }
+    if($('#patternFiltercheck input').length == 0){
+    	 $(".patternf").hide();  
+    }
+    if($('#shapeFiltercheck input').length == 0){
+    	 $(".shapef").hide();  
+    }
+    if($('#vendorsFiltercheck input').length == 0){
+    	 $(".vendorsf").hide();  
+    }  
+    if($('#colorFilter input').length == 0  && $('#materialsFiltercheck input').length == 0 && $('#patternFiltercheck input').length ==  0 && $('#styleFiltercheck input').length == 0 && $('#shapeFiltercheck input').length == 0 && $('#backheight input').length == 0 && $('#vendorsFiltercheck input').length == 0){      	
+      	$('.filterbytitle').hide();
+    }
+      
+      if(window.pageYOffset == 0 && $('.collectionproducttitle').length > 0){      
+        if(splitedURL.length > 5){ setTimeout(function(){ $('html,body').animate({ scrollTop: $('.collectionproducttitle').offset().top - 60 },'slow'); },2500);}
+      }
+
+});
+ $(document).ready(function(){
+  $(".filter_search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+   // alert(value);
+     $('.filtercheckboxblock .css-label').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+    });
+  });
+</script>  
+<!--Tejashwani 07/01/2020 End: This page is no where usable  --> 
