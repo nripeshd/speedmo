@@ -1,17 +1,17 @@
 <!doctype html>
-
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
-
+    {% render 'spdn' %}
     <meta charset="utf-8">
-    
-<!--  23/01/2021 Start: GOogle merchant verification Added meta: Added from old modish:Modish backup 18-12-2020 id=14   -->
-     <meta name="google-site-verification" content="xxZcogVArp9UdgKGm38IuxLO2tmJcU3Idun5hQzWCbw" />
-     <meta name="facebook-domain-verification" content="q70brk6a3ycux047galx8cn8yctp8i" />
-<!--  23/01/2021 Start: GOogle merchant verification Added meta: Added from old modish:Modish backup 18-12-2020 id=14   -->
-    
+    <meta name="google-site-verification" content="xxZcogVArp9UdgKGm38IuxLO2tmJcU3Idun5hQzWCbw" />
+    <meta name="facebook-domain-verification" content="q70brk6a3ycux047galx8cn8yctp8i" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
     <meta name="theme-color" content="{{ settings.accent_color }}">
+
+    <link rel="preconnect" href="https://www.dogfriendlyco.com/" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com" crossorigin>  
 
     {%- capture seo_page_title -%}
       {%- if request.page_type == 'search' and search.terms != blank -%}
@@ -22,33 +22,32 @@
     {%- endcapture -%}
 
     <title>{{- seo_page_title -}}</title>
-<!--     for collection pages 28/05/2021 -->
- {% if template contains 'collection'  %}
-    {% if collection.id != blank %}
+
+    {% if template contains 'collection'  %}
+      {% if collection.id != blank %}
         <link rel="canonical" href="{{ shop.secure_url }}{{ collection.url }}">
-    {% endif %}
-  {% else %}
-    <link rel="canonical" href="{{ canonical_url }}">
-  {% endif %}    
-     
-  {% if template contains 'search' %}
-    <meta name="robots" content="noindex">
-  {% endif %}
-  
-  
-  {% if template contains 'page' %}
-    {% if page.title == "Search Results" %}
+      {% endif %}
+    {% else %}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {% endif %}    
+
+    {% if template contains 'search' %}
       <meta name="robots" content="noindex">
     {% endif %}
-  {% endif %}
-  
-    
-  {% if template contains 'blog' %}
-    {% if blog.articles_count == 0 %}
-      <meta name="robots" content="noindex">
+
+    {% if template contains 'page' %}
+      {% if page.title == "Search Results" %}
+        <meta name="robots" content="noindex">
+      {% endif %}
     {% endif %}
-  {% endif %}
-        {%- if page_description -%}
+
+    {% if template contains 'blog' %}
+      {% if blog.articles_count == 0 %}
+        <meta name="robots" content="noindex">
+      {% endif %}
+    {% endif %}
+
+    {%- if page_description -%}
       <meta name="description" content="{{ page_description | escape }}">
     {%- endif -%}
 
@@ -58,114 +57,27 @@
       <link rel="shortcut icon" href="{{ settings.favicon | img_url: '96x96' }}" type="image/png">
     {%- endif -%}
 
-    {%- comment -%}Few prefech to increase performance on commonly used third-parties{%- endcomment -%}
-    <link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
-    <link rel="preload" as="script" href="{{ 'theme.min.js' | asset_url }}">
-<!--     hide on 19/11/2021-->
-    
-<!--     <link rel="preconnect" href="https://cdn.shopify.com"> -->
-<!--      Added by 10/5/21-->
-    
-    <script src="https://connect.facebook.net/signals/config/845597012209338?v=2.9.47&r=stable"></script>
-<!--       <script src="https://cdn.shopify.com/s/files/1/0236/1829/t/234/assets/theme.min.js?v=8324671531218528071"></script> -->
-<!--       <script src="https://searchanise-ef84.kxcdn.com/widgets.77757.min.js" defer></script> -->
-<!--        <link rel="stylesheet" href="https://searchanise-ef84.kxcdn.com/styles.8T5Y6Z0g0W.css"> -->
-   
-     <!--     hide on 19/11/2021-->
-    <!--      chnages -->
-<!--     <link rel="preload" href="https://fonts.shopifycdn.com"> -->
-<!--      <link rel="preconnect" href="https://fonts.shopifycdn.com"> -->
-    <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
-    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
-    <link rel="dns-prefetch" href="https://maps.googleapis.com">
-    <!--     hide on 19/11/2021-->
-<!--     <link rel="dns-prefetch" href="https://maps.gstatic.com"> -->
+    <script type="lazyload2" data-src="https://connect.facebook.net/signals/config/845597012209338?v=2.9.47&r=stable"></script>
 
-<!--     {% render 'social-meta-tags' %} -->
+    {% comment %}
+    {% render 'social-meta-tags' %}
+    {% endcomment %}
+
     {% render 'css-variables' %}
 
-    {{ content_for_header }}
+    {% comment %}
+      {{content_for_header}}
+    {% endcomment %}
 
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+    {% include 'content-header' %}
 
     {% render 'microdata-schema' %}
 
-    <script>
-      // This allows to expose several variables to the global scope, to be used in scripts
-      window.theme = {
-        pageType: {{ request.page_type | json }},
-        cartCount: {{ cart.item_count | json }},
-        moneyFormat: {{ shop.money_format | json }},
-        moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }},
-        showDiscount: {% if settings.show_discount %}true{% else %}false{% endif %},
-        discountMode: {{ settings.discount_mode | json }},
-        searchMode: {{ settings.search_mode | json }},
-        cartType: {{ settings.cart_type | json }}
-      };
+    {% render 'style-tags' %}
 
-      window.routes = {
-        rootUrl: {{ routes.root_url | json }},
-        rootUrlWithoutSlash: {% if routes.root_url == '/' %}''{% else %}{{ routes.root_url | json }}{% endif %},
-        cartUrl: {{ routes.cart_url | json }},
-        cartAddUrl: {{ routes.cart_add_url | json }},
-        cartChangeUrl: {{ routes.cart_change_url | json }},
-        searchUrl: {{ routes.search_url | json }},
-        productRecommendationsUrl: {{ routes.product_recommendations_url | json }}
-      };
+    {% render 'script-tags' %}
 
-      window.languages = {
-        productRegularPrice: {{ 'product.general.regular_price' | t | json }},
-        productSalePrice: {{ 'product.general.sale_price' | t | json }},
-        collectionOnSaleLabel: {{ 'collection.product.discount_html' | t | json }},
-        productFormUnavailable: {{ 'product.form.unavailable' | t | json }},
-        productFormAddToCart: {% if product.template_suffix == 'pre-order' %}{{ 'product.form.pre_order' | t | json }}{% else %}{{ 'product.form.add_to_cart' | t | json }}{% endif %},
-        productFormSoldOut: {{ 'product.form.sold_out' | t | json }},
-        productAdded: {{ 'product.form.added' | t | json }},
-        productAddedShort: {{ 'product.form.added_short' | t | json }},
-        shippingEstimatorNoResults: {{ 'cart.shipping_estimator.no_results_title' | t | json }},
-        shippingEstimatorOneResult: {{ 'cart.shipping_estimator.one_result_title' | t | json }},
-        shippingEstimatorMultipleResults: {{ 'cart.shipping_estimator.multiple_results_title' | t | json }},
-        shippingEstimatorErrors: {{ 'cart.shipping_estimator.errors' | t | json }}
-      };
-
-      window.lazySizesConfig = {
-        loadHidden: false,
-        hFac: 0.8,
-        expFactor: 3,
-        customMedia: {
-          '--phone': '(max-width: 640px)',
-          '--tablet': '(min-width: 641px) and (max-width: 1023px)',
-          '--lap': '(min-width: 1024px)'
-        }
-      };
-
-      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-    </script>
-
-    {%- if request.page_type == 'customers/addresses' -%}
-      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
-      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
-    {%- endif -%}
-
-    <script src="{{ 'theme.min.js' | asset_url }}" defer></script>
-    <script src="{{ 'custom.js' | asset_url }}" defer></script>
-
-    {%- if request.page_type != 'cart' -%}
-      <script>
-        (function () {
-          window.onpageshow = function() {
-            // We force re-freshing the cart content onpageshow, as most browsers will serve a cache copy when hitting the
-            // back button, which cause staled data
-            document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
-              bubbles: true,
-              detail: {scrollToTop: false}
-            }));
-          };
-        })();
-      </script>
-    {%- endif -%}
   </head>
-
   <body class="warehouse--v1 {% if settings.animation_image_zoom %}features--animate-zoom{% endif%} template-{{ request.page_type | handle }} {% if request.page_type contains '/' %}template-{{ request.page_type | split: '/' | last | handle }}{% endif %}" data-instant-intensity="viewport">
     <a href="#main" class="visually-hidden skip-to-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
     <span class="loading-bar"></span>
@@ -174,32 +86,36 @@
 
     {%- unless request.page_type == 'cart' -%}
       {%- comment -%}As required by Shopify rules, popup must be removed on cart page to remove distraction{%- endcomment -%}
-      
     {%- endunless -%}
-<!--     {% section 'search-bar-div' %} -->
-    
-        {% section 'header' %}
+
+    {% comment %}
+      {% section 'search-bar-div' %}
+    {% endcomment %}
+
+    {% section 'header' %}
 
     <main id="main" role="main">
       {{ content_for_layout }}
     </main>
+
     {%- if request.page_type == 'blog' or request.page_type == 'article' -%}
       {% section 'static-newsletter' %}
     {%- endif -%}
+
     {% section 'text-with-icons' %}    
     {% section 'footer' %}
 
     {%- if page.handle != "contact-us"-%}
-    
-    <button onclick="topFunction()" id="chatnow_button" title="Chat Now"><a href="/pages/contact-us" target="_blank">Chat Now</a></button>
-  	
+      <button onclick="topFunction()" id="chatnow_button" title="Chat Now"><a href="/pages/contact-us" target="_blank">Chat Now</a></button>
     {%- endif -%}
 
     <ul hidden>
       <li id="a11y-new-window-message">{{ 'general.accessibility.new_window' | t }}</li>
     </ul>
-    
-  
+
+    <script> var _0x3275=['lazyload_image','click','img.lazy','1WaCnRd','srcset','getAttribute','rel','getBoundingClientRect','479IQtiyV','.lazybg','Linux\x20x86_64','src','lazyload2','createElement','.lazyload_image','querySelectorAll','data-href','remove','221439GyRWGn','lazy','length','documentElement','top','href','rdata-src','attachEvent','forEach','getElementsByTagName','lazy2','touchstart','onload','iframe','1pruHXS','mobsrc','84013mBPwJS','758qCZTRo','innerWidth','setAttribute','type','clientHeight','script','77qFKyWL','8848PezudS','link','head','dataset','innerHTML','scroll','platform','appendChild','load','bottom','47098BwCSci','mousemove','clientWidth','stylesheet','2mUnqRg','addEventListener','68797qnvpyU','classList','style','DOMContentLoaded','dispatchEvent','img.lazy2','mobstyle','body'];var _0x23332d=_0x569a;(function(_0x3bb612,_0x17c1ab){var _0x3bf756=_0x569a;while(!![]){try{var _0xf89eb3=parseInt(_0x3bf756(0x1c0))+parseInt(_0x3bf756(0x1b8))+-parseInt(_0x3bf756(0x18e))*parseInt(_0x3bf756(0x199))+-parseInt(_0x3bf756(0x1bf))*parseInt(_0x3bf756(0x19e))+parseInt(_0x3bf756(0x1a8))+parseInt(_0x3bf756(0x1ca))*-parseInt(_0x3bf756(0x1ce))+-parseInt(_0x3bf756(0x1b6))*-parseInt(_0x3bf756(0x1b9));if(_0xf89eb3===_0x17c1ab)break;else _0x3bb612['push'](_0x3bb612['shift']());}catch(_0xb05be2){_0x3bb612['push'](_0x3bb612['shift']());}}}(_0x3275,0x1c1ee));function _0x569a(_0x1b55f0,_0x588bb8){return _0x569a=function(_0x3275ae,_0x569a54){_0x3275ae=_0x3275ae-0x18d;var _0x353ee7=_0x3275[_0x3275ae];return _0x353ee7;},_0x569a(_0x1b55f0,_0x588bb8);}var script_loaded=!0x1;function loadJSscripts(){var _0x48ee67=_0x569a;if(!script_loaded){script_loaded=!0x0;var _0x1713ac=document[_0x48ee67(0x1b1)](_0x48ee67(0x1be));for(i=0x0;i<_0x1713ac[_0x48ee67(0x1aa)];i++)null!==_0x1713ac[i][_0x48ee67(0x19b)](_0x48ee67(0x1ae))&&(_0x1713ac[i][_0x48ee67(0x1bb)]('src',_0x1713ac[i][_0x48ee67(0x19b)](_0x48ee67(0x1ae))),delete _0x1713ac[i]['dataset'][_0x48ee67(0x1a1)]);var _0x35b11d=document['getElementsByTagName'](_0x48ee67(0x1c1));for(i=0x0;i<_0x35b11d['length'];i++)null!==_0x35b11d[i][_0x48ee67(0x19b)]('data-href')&&(_0x35b11d[i][_0x48ee67(0x1bb)](_0x48ee67(0x1ad),_0x35b11d[i][_0x48ee67(0x19b)](_0x48ee67(0x1a6))),delete _0x35b11d[i][_0x48ee67(0x1c3)]['href']);document[_0x48ee67(0x192)](new CustomEvent('StartKernelLoading')),setTimeout(function(){var _0x1b1264=_0x48ee67;document[_0x1b1264(0x192)](new CustomEvent('StartAsyncLoading'));},0x258),document['querySelectorAll'](_0x48ee67(0x1a4))[_0x48ee67(0x1b0)](_0x3d4252=>{var _0xc125b=_0x48ee67;void 0x0!==_0x3d4252['dataset'][_0xc125b(0x1a1)]&&(_0x3d4252[_0xc125b(0x1a1)]=_0x3d4252['dataset']['src']),void 0x0!==_0x3d4252[_0xc125b(0x1c3)]['srcset']&&(_0x3d4252[_0xc125b(0x19a)]=_0x3d4252['dataset'][_0xc125b(0x19a)]),_0x3d4252['classList'][_0xc125b(0x1a7)](_0xc125b(0x196));});}}window[_0x23332d(0x18d)](_0x23332d(0x1c5),function(_0x4d5170){loadJSscripts();}),window[_0x23332d(0x18d)](_0x23332d(0x1cb),function(){loadJSscripts();}),window['addEventListener'](_0x23332d(0x1b3),function(){loadJSscripts();}),window[_0x23332d(0x18d)]?window[_0x23332d(0x18d)](_0x23332d(0x1c8),function(){setTimeout(loadJSscripts,0x2328);},!0x1):window[_0x23332d(0x1af)]?window[_0x23332d(0x1af)](_0x23332d(0x1b4),function(){setTimeout(loadJSscripts,0x2328);}):window[_0x23332d(0x1b4)]=loadJSscripts;var windowWidth,lazyImages,lazyBackground,lazyIframe,lazyScripts,navigator_platform,src,style,datasrc,urls,analytics,s,x,i,j,flag;function ks_init(){flag&&(flag=0x0,lazyLoadImg(),lazyLoadBackground(),lazyLoadIframe(),load_all_js());}function isElementInViewport(_0x5637c6){var _0x19b4ef=_0x23332d,_0x5dd149=_0x5637c6[_0x19b4ef(0x19d)]();return _0x5dd149[_0x19b4ef(0x1ac)]>=0x0&&_0x5dd149['left']>=0x0&&_0x5dd149[_0x19b4ef(0x1c9)]<=(window['innerHeight']||document[_0x19b4ef(0x1ab)][_0x19b4ef(0x1bd)])&&_0x5dd149['right']<=(window[_0x19b4ef(0x1ba)]||document[_0x19b4ef(0x1ab)][_0x19b4ef(0x1cc)]);}function lazyLoadImg(){lazyImages['forEach'](function(_0x2a570e){var _0x3e7578=_0x569a;null!=(src=windowWidth<0x258?null==_0x2a570e[_0x3e7578(0x1c3)][_0x3e7578(0x1b7)]?_0x2a570e[_0x3e7578(0x1c3)][_0x3e7578(0x1a1)]:_0x2a570e[_0x3e7578(0x1c3)][_0x3e7578(0x1b7)]:_0x2a570e[_0x3e7578(0x1c3)][_0x3e7578(0x1a1)])&&(_0x2a570e['src']=src),_0x2a570e[_0x3e7578(0x18f)][_0x3e7578(0x1a7)](_0x3e7578(0x1b2));});}function lazyLoadImg2(){var _0x3b08b1=_0x23332d;lazyImages[_0x3b08b1(0x1b0)](function(_0x32f8f5){var _0x3f148e=_0x3b08b1;isElementInViewport(_0x32f8f5)&&(null!=(src=windowWidth<0x258?null==_0x32f8f5[_0x3f148e(0x1c3)]['mobsrc']?_0x32f8f5[_0x3f148e(0x1c3)]['src']:_0x32f8f5['dataset'][_0x3f148e(0x1b7)]:_0x32f8f5[_0x3f148e(0x1c3)][_0x3f148e(0x1a1)])&&(_0x32f8f5[_0x3f148e(0x1a1)]=src),_0x32f8f5['classList']['remove'](_0x3f148e(0x1a9)));});}function lazyLoadBackground(){var _0x356ef4=_0x23332d;lazyBackground[_0x356ef4(0x1b0)](function(_0x1052c2){var _0x191518=_0x356ef4;lazybg=windowWidth<0x258?null==_0x1052c2[_0x191518(0x1c3)][_0x191518(0x194)]?_0x1052c2[_0x191518(0x1c3)][_0x191518(0x190)]:_0x1052c2[_0x191518(0x1c3)]['mobstyle']:_0x1052c2[_0x191518(0x1c3)]['style'],null!=lazybg&&(_0x1052c2[_0x191518(0x190)]=lazybg),_0x1052c2['classList'][_0x191518(0x1a7)]('lazybg');});}function lazyLoadIframe(){var _0x122a39=_0x23332d;lazyIframe[_0x122a39(0x1b0)](function(_0x16a252){var _0x44e6b2=_0x122a39;null!=_0x16a252[_0x44e6b2(0x1c3)][_0x44e6b2(0x1a1)]&&(_0x16a252[_0x44e6b2(0x1a1)]=_0x16a252[_0x44e6b2(0x1c3)][_0x44e6b2(0x1a1)]);});}function lazyLoadScripts(){var _0x4c2b7c=_0x23332d;j!=lazyScripts[_0x4c2b7c(0x1aa)]&&(_0x4c2b7c(0x1a2)==lazyScripts[j][_0x4c2b7c(0x19b)](_0x4c2b7c(0x1bc))?(lazyScripts[j][_0x4c2b7c(0x1bb)](_0x4c2b7c(0x1bc),'lazyloaded'),void 0x0!==lazyScripts[j][_0x4c2b7c(0x1c3)]['src']?((s=document['createElement'](_0x4c2b7c(0x1be)))[_0x4c2b7c(0x1a1)]=lazyScripts[j][_0x4c2b7c(0x1c3)][_0x4c2b7c(0x1a1)],document['body']['appendChild'](s),s['onload']=function(){j++,lazyLoadScripts();}):((s=document[_0x4c2b7c(0x1a3)](_0x4c2b7c(0x1be)))[_0x4c2b7c(0x1c4)]=lazyScripts[j][_0x4c2b7c(0x1c4)],document[_0x4c2b7c(0x195)][_0x4c2b7c(0x1c7)](s),j++,lazyLoadScripts())):(j++,lazyLoadScripts()));}function lazyLoadCss(_0x2c97b0){var _0x321f4c=_0x23332d;(s=document[_0x321f4c(0x1a3)](_0x321f4c(0x1c1)))[_0x321f4c(0x19c)]=_0x321f4c(0x1cd),s['href']=_0x2c97b0,document['getElementsByTagName'](_0x321f4c(0x1c2))[0x0]['appendChild'](s);}function lazyLoadJS(_0x189a17){var _0x595dfe=_0x23332d;(s=document[_0x595dfe(0x1a3)](_0x595dfe(0x1be)))['src']=_0x189a17,document['body'][_0x595dfe(0x1c7)](s);}document['addEventListener'](_0x23332d(0x191),function(){var _0x599b8e=_0x23332d;windowWidth=screen['width'],lazyImages=document['querySelectorAll'](_0x599b8e(0x193)),nolazyImages=document[_0x599b8e(0x1a5)](_0x599b8e(0x198)),lazyBackground=document[_0x599b8e(0x1a5)](_0x599b8e(0x19f)),lazyIframe=document['querySelectorAll'](_0x599b8e(0x1b5)),lazyScripts=document[_0x599b8e(0x1b1)](_0x599b8e(0x1be)),navigator_platform=navigator[_0x599b8e(0x1c6)],i=0x0,j=0x0,flag=0x1,window[_0x599b8e(0x18d)]('scroll',function(){ks_init();}),window[_0x599b8e(0x18d)](_0x599b8e(0x1cb),function(){ks_init();}),window[_0x599b8e(0x18d)](_0x599b8e(0x1b3),function(){ks_init();}),_0x599b8e(0x1a0)!=navigator_platform&&ks_init();});function load_all_js(){var _0x3378f4=_0x23332d;document[_0x3378f4(0x195)][_0x3378f4(0x197)](),j=0x0,lazyScripts=document[_0x3378f4(0x1b1)](_0x3378f4(0x1be)),lazyLoadScripts(),setInterval(function(){var _0xd907ea=_0x3378f4;lazyImages=document['querySelectorAll'](_0xd907ea(0x193)),lazyBackground=document['querySelectorAll'](_0xd907ea(0x19f)),lazyLoadImg(),lazyLoadBackground();},0x7d0);}</script>
+    <script>var _0x50ea=['img.lazy2','828679vNDmiv','184728kLURpD','62451QAbOXu','querySelectorAll','getElementsByTagName','765752olfJNQ','body','1091QUMmxn','391669LFTYNG','script','659EXXbOp','2vAJXOc','click','3JdSXWj','169563pSkzCg'];(function(_0x38309f,_0x5921d0){var _0x2cc72c=_0x3c2a;while(!![]){try{var _0x513dfa=-parseInt(_0x2cc72c(0xf1))+parseInt(_0x2cc72c(0xf2))+-parseInt(_0x2cc72c(0xec))*parseInt(_0x2cc72c(0xe9))+-parseInt(_0x2cc72c(0xf3))*-parseInt(_0x2cc72c(0xee))+parseInt(_0x2cc72c(0xeb))*parseInt(_0x2cc72c(0xf8))+parseInt(_0x2cc72c(0xef))+parseInt(_0x2cc72c(0xf6));if(_0x513dfa===_0x5921d0)break;else _0x38309f['push'](_0x38309f['shift']());}catch(_0x17d334){_0x38309f['push'](_0x38309f['shift']());}}}(_0x50ea,0x6528c));function _0x3c2a(_0x1e710f,_0x415e6d){return _0x3c2a=function(_0x50eadf,_0x3c2a94){_0x50eadf=_0x50eadf-0xe9;var _0x2dce90=_0x50ea[_0x50eadf];return _0x2dce90;},_0x3c2a(_0x1e710f,_0x415e6d);}function load_all_js(){var _0x52786d=_0x3c2a;document[_0x52786d(0xf7)][_0x52786d(0xed)](),j=0x0,lazyScripts=document[_0x52786d(0xf5)](_0x52786d(0xea)),lazyLoadScripts(),setInterval(function(){var _0x22c3cc=_0x52786d;lazyImages=document[_0x22c3cc(0xf4)](_0x22c3cc(0xf0)),lazyBackground=document['querySelectorAll']('.lazybg'),lazyLoadImg(),lazyLoadBackground();},0x7d0);}</script>    
+
 </body>
 </html>
 

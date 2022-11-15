@@ -13812,4 +13812,13 @@ border:1px solid var(--border-color);
        text-decoration: underline;
   color:#4081ec;
 }
- 
+@media only screen and (min-width: 641px){
+  .desktop-hidden{
+    display: none;
+  }
+}
+@media only screen and (max-width: 640px){
+  .mobile-hidden{
+    display: none;
+  }
+}
